@@ -35,7 +35,7 @@ bot.command('alert', async (ctx) => {
 bot.action('launch_mini_app', async (ctx) => {
   // Placeholder URL for the mini app
   //const miniAppUrl = 'https://telegram-app-2.vercel.app/';
-  const miniAppUrl = 'https://t.me/intenziabot/myapp';
+  const miniAppUrl = 'https://t.me/intenzia2bot/app2'; 
 
   // Perform actions to launch your mini app (open the URL)
   await ctx.reply(`Launching mini app. Open this URL: ${miniAppUrl}`);
