@@ -3,8 +3,7 @@ const { message } = require('telegraf/filters')
 
 require('dotenv/config')
 
-// Replace 'YOUR_BOT_TOKEN' with your actual bot token
-const bot = new Telegraf(process.env.TOKEN);
+const bot = new Telegraf(process.env.TOKEN2);
 
 bot.use((ctx, next) => {
   if (ctx.message?.text)
@@ -13,7 +12,6 @@ bot.use((ctx, next) => {
 });
 
 
-// Example with reply keyboard
 bot.hears('Show Reply Keyboard', (ctx) => {
   const keyboard = Markup.keyboard([
     ['Button 1', 'Button 2'],
@@ -36,7 +34,8 @@ bot.command('alert', async (ctx) => {
 // Handle the button press to launch the mini app
 bot.action('launch_mini_app', async (ctx) => {
   // Placeholder URL for the mini app
-  const miniAppUrl = 'https://example.com/your-mini-app';
+  //const miniAppUrl = 'https://telegram-app-2.vercel.app/';
+  const miniAppUrl = 'https://t.me/intenziabot/myapp';
 
   // Perform actions to launch your mini app (open the URL)
   await ctx.reply(`Launching mini app. Open this URL: ${miniAppUrl}`);
