@@ -2,6 +2,14 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .alert-list {
   max-width: 400px;
   margin: 0 auto;
