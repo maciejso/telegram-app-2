@@ -1,4 +1,4 @@
-import bitcoinImg from "../images/bitoin.png";
+import bitcoinImg from "../images/bitcoin.png";
 import ethereumImg from "../images/ethereum.png";
 import tonImg from "../images/ton.png";
 
