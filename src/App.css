@@ -1,6 +1,8 @@
-/* TodoList.css */
-.todo-list {
-  font-family: 'Arial', sans-serif;
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.alert-list {
   max-width: 400px;
   margin: 0 auto;
 }
@@ -28,7 +30,7 @@ li {
 }
 
 .overdue {
-  border-color: #ff6347; /* Tomato color for overdue tasks */
+  border-color: #ff6347; 
 }
 
 .due-date {

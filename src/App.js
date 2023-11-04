@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "./Components/Card/Card";
 import Cart from "./Components/Cart/Cart";
+import DateTimePicker from "./Components/DateTimePicker";
 const { getData } = require("./db/db");
 const foods = getData();
 
@@ -9,10 +10,10 @@ const tele = window.Telegram.WebApp;
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
-    const [todos, setTodos] = useState([
-    { id: 1, text: 'Complete task 1', dueDate: '2023-11-10' },
-    { id: 2, text: 'Read a book', dueDate: '2023-11-15' },
-    // Add more tasks as needed
+  const [alerts, setAlerts] = useState([
+    { id: 1, cryptocurrency: 'BTC', dueDate: '2023-11-10' },
+    { id: 2, cryptocurrency: 'ETH', dueDate: '2023-11-15' },
+    { id: 3, cryptocurrency: 'TON', dueDate: '2023-11-15' },
   ]);
 
   useEffect(() => {
@@ -50,18 +51,23 @@ function App() {
     tele.MainButton.show();
   };
 
-    return (
-    <div className="todo-list">
-      <h1>My Todo List</h1>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className={new Date(todo.dueDate) < new Date() ? ' overdue' : ''}>
-            <span>{todo.text}</span>
-            <span className="due-date">Due: {todo.dueDate}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+  return (
+    <>
+      <div className="alert-list">
+        <h1>Cryptocurrencies:</h1>
+        <h1>My Alerts</h1>
+        <ul>
+          {alerts.map((todo) => (
+            <li key={todo.id} className={new Date(todo.dueDate) < new Date() ? ' overdue' : ''}>
+              <span>{todo.cryptocurrency}</span>
+              <span className="due-date">Due: {todo.dueDate}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <h1>Set Alert</h1>
+      <DateTimePicker />
+    </>
   );
 };
 /*
