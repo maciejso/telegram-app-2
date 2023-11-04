@@ -9,6 +9,11 @@ const tele = window.Telegram.WebApp;
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+    const [todos, setTodos] = useState([
+    { id: 1, text: 'Complete task 1', dueDate: '2023-11-10' },
+    { id: 2, text: 'Read a book', dueDate: '2023-11-15' },
+    // Add more tasks as needed
+  ]);
 
   useEffect(() => {
     tele.ready();
@@ -45,6 +50,21 @@ function App() {
     tele.MainButton.show();
   };
 
+    return (
+    <div className="todo-list">
+      <h1>My Todo List</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id} className={new Date(todo.dueDate) < new Date() ? ' overdue' : ''}>
+            <span>{todo.text}</span>
+            <span className="due-date">Due: {todo.dueDate}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+/*
   return (
     <>
       <h1 className="heading">Set Alert</h1>
@@ -59,5 +79,6 @@ function App() {
     </>
   );
 }
+*/
 
 export default App;
