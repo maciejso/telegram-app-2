@@ -15,21 +15,13 @@ function App() {
     tele.ready();
   })
 
-  const handleSaveAlert = (newAlert) => {
-    setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
-  };
 
-  const handleEditAlert = (editedAlert) => {
-    console.log('Edited Alert:', editedAlert);
-  };
-
-  const [alerts, setAlerts] = useState([]);
 
   return (
     <div className="container">
       <h1>Crypto Alerts</h1>
       <Prices />
-      <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
+      <AlertList />
       <Alert />
     </div>
   );

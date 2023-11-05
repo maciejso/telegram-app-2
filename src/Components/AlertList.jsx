@@ -1,10 +1,44 @@
 // AlertList.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 
-const AlertList = ({ alerts, onEditAlert }) => {
+const url = "http://localhost:5000/alerts?state=active"
+
+const AlertList = () => {
+   const [alerts, setAlerts] = useState([]);
   const [editingAlertId, setEditingAlertId] = useState(null);
   const [editedAlert, setEditedAlert] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const handleSaveAlert = (newAlert) => {
+    setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+  };
+
+  const onEditAlert = (editedAlert) => {
+    console.log('Edited Alert:', editedAlert);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setAlerts(data);
+        setLoading(false);  // Update loading state
+      } catch (error) {
+        console.error(error);
+        setLoading(false);  // Update loading state in case of error
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   const handleEditClick = (alertId) => {
     setEditingAlertId(alertId);
@@ -32,6 +66,7 @@ const AlertList = ({ alerts, onEditAlert }) => {
   return (
     <div className="alert-list-container">
       <h2>Alerts List</h2>
+      {loading ? (<p>Loading...</p>) : (
 
       <ul className="alert-list">
         {alerts.map((alert) => (
@@ -82,7 +117,7 @@ const AlertList = ({ alerts, onEditAlert }) => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul>)}
     </div>
   );
 };
