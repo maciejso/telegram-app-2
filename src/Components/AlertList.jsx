@@ -79,14 +79,12 @@ const AlertList = () => {
                         <option value="Bitcoin">BTC</option>
                         <option value="Ethereum">ETH</option>
                         <option value="Ton">TON</option>
-                        {/* Add more cryptocurrencies as needed */}
                       </select>
                     </p>
                     <p><strong>Type:</strong>
                       <select value={editedAlert.type} onChange={(e) => handleInputChange('type', e.target.value)}>
                         <option value="Percent Change">Percent Change</option>
                         <option value="Value Change">Value Change</option>
-                        {/* Add more types as needed */}
                       </select>
                     </p>
                     <p><strong>Value:</strong>
@@ -98,10 +96,10 @@ const AlertList = () => {
                   </>
                 ) : (
                   <>
-                    <p><strong>Cryptocurrency:</strong> {alert.cryptocurrency}</p>
-                    <p><strong>Type:</strong> {alert.type}</p>
-                    <p><strong>Value:</strong> {alert.value}</p>
-                    <p><strong>Expiry Date:</strong> {alert.expiryDate}</p>
+                    <p><strong>Cryptocurrency: </strong> {alert.cryptocurrency}</p>
+                    <p><strong>Type: </strong> {alert.trigger_type}</p>
+                    <p><strong>Value: </strong>{ alert.trigger_type == "value_change" ? "$" : ""} {alert.trigger_value}{alert.trigger_type == "percent_change" ? "%" : ""}</p>
+                    <p><strong>Expiry Date :</strong> {alert.expires_at}</p>
                   </>
                 )}
               </div>
