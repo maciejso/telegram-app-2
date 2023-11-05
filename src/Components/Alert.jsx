@@ -38,7 +38,7 @@ const Alert = () => {
 
   return (
     <div className="alert-container">
-      <h2>Create Cryptocurrency Alert</h2>
+      <h2>Add Cryptocurrency Alert</h2>
 
       <div className="form-group">
         <label htmlFor="datetimePicker">Select Date and Time:</label>

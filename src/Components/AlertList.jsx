@@ -39,10 +39,24 @@ const AlertList = ({ alerts, onEditAlert }) => {
             <div className="alert-details">
               {editingAlertId === alert.id ? (
                 <>
-                  <p><strong>Date and Time:</strong> <input type="datetime-local" value={editedAlert.datetime} onChange={(e) => handleInputChange('datetime', e.target.value)} /></p>
-                  <p><strong>Cryptocurrency:</strong> <input type="text" value={editedAlert.cryptocurrency} onChange={(e) => handleInputChange('cryptocurrency', e.target.value)} /></p>
-                  <p><strong>Type:</strong> <input type="text" value={editedAlert.type} onChange={(e) => handleInputChange('type', e.target.value)} /></p>
-                  <p><strong>Expiry Date:</strong> <input type="text" value={editedAlert.expiryDate} onChange={(e) => handleInputChange('expiryDate', e.target.value)} /></p>
+                  <p><strong>Expiry Date:</strong> 
+                    <input type="datetime-local" value={editedAlert.datetime} onChange={(e) => handleInputChange('datetime', e.target.value)} />
+                  </p>
+                  <p><strong>Cryptocurrency:</strong> 
+                    <select value={editedAlert.cryptocurrency} onChange={(e) => handleInputChange('cryptocurrency', e.target.value)}>
+                      <option value="Bitcoin">Bitcoin</option>
+                      <option value="Ethereum">Ethereum</option>
+                      <option value="Ripple">Ripple</option>
+                      {/* Add more cryptocurrencies as needed */}
+                    </select>
+                  </p>
+                  <p><strong>Type:</strong> 
+                    <select value={editedAlert.type} onChange={(e) => handleInputChange('type', e.target.value)}>
+                      <option value="Percent Change">Percent Change</option>
+                      <option value="Value Change">Value Change</option>
+                      {/* Add more types as needed */}
+                    </select>
+                  </p>
                 </>
               ) : (
                 <>
