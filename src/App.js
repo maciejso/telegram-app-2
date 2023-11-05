@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import DateTimePicker from "./Components/DateTimePicker";
-import Dropdown from "./Components/Dropdown";
+import Alert from './Components/Alert'
 const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
@@ -39,9 +38,7 @@ function App() {
           ))}
         </ul>
       </div>
-      <h1>Set Alert</h1>
-      <DateTimePicker />
-      <Dropdown options={typeOptions} onSelect={handleTypeSelect} />
+      <Alert />
     </div>
   );
 };
