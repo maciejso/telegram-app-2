@@ -6,8 +6,8 @@ const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
 );
 
-const Dropdown = ({ options, value, onChange }) => (
-  <select value={value} onChange={(e) => onChange(e.target.value)}>
+const Dropdown = ({ options, selectedOption, onChange }) => ( // Change 'value' to 'selectedOption'
+  <select value={selectedOption} onChange={(e) => onChange(e.target.value)}>
     {options.map((option) => (
       <option key={option} value={option}>
         {option}
@@ -18,10 +18,10 @@ const Dropdown = ({ options, value, onChange }) => (
 
 const Alert = () => {
   const [alert, setAlert] = useState({
-    cryptocurrency: '',
-    type: '',
-    value: '', // Added the value field
-    expiryDate: '',
+    cryptocurrency: 'BTC',
+    type: 'value',
+    value: '50000',
+    expiryDate: "2023-12-31T23:59"
   });
 
   const handleInputChange = (field, value) => {
@@ -38,13 +38,13 @@ const Alert = () => {
 
   return (
     <div className="alert-container">
-      <h2>Add Cryptocurrency Alert</h2>
+      <h2>Add Alert</h2>
 
       <div className="form-group">
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
         <Dropdown
-          options={['BTC', 'ETH', 'TON']} // Add more cryptocurrencies as needed
-          value={alert.cryptocurrency}
+          options={['BTC', 'ETH', 'TON']} 
+          selectedOption={alert.cryptocurrency} // Change 'value' to 'selectedOption'
           onChange={(value) => handleInputChange('cryptocurrency', value)}
         />
       </div>
@@ -53,7 +53,7 @@ const Alert = () => {
         <label htmlFor="typePicker">Select Type:</label>
         <Dropdown
           options={['Percent Change', 'Value Change']}
-          value={alert.type}
+          selectedOption={alert.type} // Change 'value' to 'selectedOption'
           onChange={(value) => handleInputChange('type', value)}
         />
       </div>

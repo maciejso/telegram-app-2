@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Alert from './Components/Alert'
 import AlertList from "./Components/AlertList";
+import CoinPrices from "./Components/Prices";
 const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
+
+const apiKey="ba29f4f9-9c6e-4023-98cd-fb576b3b7b3c"
 
 function App() {
   const typeOptions = ['BTC', 'ETH', 'TON'];
@@ -30,6 +33,7 @@ function App() {
 
   return (
     <div className="container">
+      <CoinPrices apiKey={apiKey} />
       <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
       <Alert />
     </div>

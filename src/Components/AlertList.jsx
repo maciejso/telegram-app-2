@@ -31,7 +31,7 @@ const AlertList = ({ alerts, onEditAlert }) => {
 
   return (
     <div className="alert-list-container">
-      <h2>Alert List</h2>
+      <h2>Alerts List</h2>
 
       <ul className="alert-list">
         {alerts.map((alert) => (
