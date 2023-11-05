@@ -18,9 +18,9 @@ const Dropdown = ({ options, value, onChange }) => (
 
 const Alert = () => {
   const [alert, setAlert] = useState({
-    value: '',
     cryptocurrency: '',
     type: '',
+    value: '', // Added the value field
     expiryDate: '',
   });
 
@@ -40,7 +40,6 @@ const Alert = () => {
     <div className="alert-container">
       <h2>Add Cryptocurrency Alert</h2>
 
-
       <div className="form-group">
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
         <Dropdown
@@ -58,17 +57,21 @@ const Alert = () => {
           onChange={(value) => handleInputChange('type', value)}
         />
       </div>
+
       <div className="form-group">
-        <label htmlFor="value">Value</label>
-        <input type="text" value={alert.value} onChange={(value) => handleInputChange('value', value)}
-        ></input>
+        <label htmlFor="value">Value:</label>
+        <input
+          type="text"
+          value={alert.value}
+          onChange={(e) => handleInputChange('value', e.target.value)}
+        />
       </div>
 
       <div className="form-group">
-        <label htmlFor="datetimePicker">Expirty Date:</label>
+        <label htmlFor="datetimePicker">Expiry Date:</label>
         <DateTimePicker
-          value={alert.expirtyDate}
-          onChange={(value) => handleInputChange('datetime', value)}
+          value={alert.expiryDate}
+          onChange={(value) => handleInputChange('expiryDate', value)}
         />
       </div>
 
