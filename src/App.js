@@ -7,7 +7,7 @@ const { getData } = require("./db/db");
 const tele = window.Telegram.WebApp;
 
 function App() {
-   const typeOptions = ['Option1', 'Option2', 'Option3'];
+   const typeOptions = ['BTC', 'ETH', 'TON'];
 
   const handleTypeSelect = (selectedType) => {
     console.log('Selected Type:', selectedType);
@@ -27,7 +27,8 @@ function App() {
   return (
     <div className="container">
       <div className="alert-list">
-        <h1>Cryptocurrencies:</h1>
+        <h1>Cryptocurrencies</h1>
+        <p></p>
         <h1>My Alerts</h1>
         <ul>
           {alerts.map((todo) => (

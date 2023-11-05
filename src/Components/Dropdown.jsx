@@ -13,7 +13,7 @@ const Dropdown = ({ options, onSelect }) => {
 
   return (
     <div className="dropdown">
-      <label htmlFor="typeSelection">Select Coin:</label>
+      <label htmlFor="typeSelection">Coin</label>
       <select
         id="typeSelection"
         name="typeSelection"

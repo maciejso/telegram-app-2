@@ -11,11 +11,11 @@ const DateTimePicker = () => {
 
   return (
     <div className="datetime-picker">
-      <label htmlFor="dueDate"></label>
+      <label htmlFor="expiryDate">Expiry Date</label>
       <input
         type="datetime-local"
-        id="dueDate"
-        name="dueDate"
+        id="expirtyDate"
+        name="expirtyDate"
         value={selectedDate}
         onChange={handleDateChange}
       />
