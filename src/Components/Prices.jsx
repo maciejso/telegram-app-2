@@ -5,12 +5,13 @@ import './Prices.css'; // Import the CSS file
 const CoinPrices = ({ apiKey }) => {
   const [cryptoData, setCryptoData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  //const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
+  const url = "http://localhost:3000/prices"
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
+        url,
           {
             headers: {
               'X-CMC_PRO_API_KEY': apiKey,
@@ -37,7 +38,7 @@ const CoinPrices = ({ apiKey }) => {
 
   return (
     <div className="coin-prices-container">
-      <h2 className="coin-prices-header">Crypto Prices</h2>
+      <h2 className="coin-prices-header">Crypto Alerts</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (

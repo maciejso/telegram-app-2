@@ -1,4 +1,3 @@
-// Alert.js
 import React, { useState } from 'react';
 import './Alert.css';
 
@@ -6,7 +5,7 @@ const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
 );
 
-const Dropdown = ({ options, selectedOption, onChange }) => ( // Change 'value' to 'selectedOption'
+const Dropdown = ({ options, selectedOption, onChange }) => ( 
   <select value={selectedOption} onChange={(e) => onChange(e.target.value)}>
     {options.map((option) => (
       <option key={option} value={option}>
@@ -32,7 +31,6 @@ const Alert = () => {
   };
 
   const handleSaveAlert = () => {
-    // Implement your save logic using API here
     console.log('Alert saved:', alert);
   };
 
