@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css'; // Import the CSS file
 
-const CoinPrices = ({ apiKey }) => {
+const Prices = ({ apiKey }) => {
   const [cryptoData, setCryptoData] = useState([]);
   const [loading, setLoading] = useState(true);
   //const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
-  const url = "http://localhost:3000/prices"
+  const url = "http://localhost:5000/prices"
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,8 +14,9 @@ const CoinPrices = ({ apiKey }) => {
         url,
           {
             headers: {
-              'X-CMC_PRO_API_KEY': apiKey,
+            'X-CMC_PRO_API_KEY': apiKey,
             'Access-Control-Allow-Origin': '*',
+            "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
             },
           }
         );
@@ -55,4 +56,4 @@ const CoinPrices = ({ apiKey }) => {
   );
 };
 
-export default CoinPrices;
+export default Prices;

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Alert from './Components/Alert'
 import AlertList from "./Components/AlertList";
-import CoinPrices from "./Components/Prices";
+import Prices from "./Components/Prices";
 const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="container">
-      <CoinPrices apiKey={apiKey} />
+      <Prices apiKey={apiKey} />
       <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
       <Alert />
     </div>
