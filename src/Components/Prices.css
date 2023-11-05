@@ -1,11 +1,13 @@
 .coin-prices-container {
   max-width: 400px;
+  min-width: 392px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  box-sizing: border-box;
 }
 
 .coin-prices-header {
