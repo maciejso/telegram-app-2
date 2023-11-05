@@ -39,14 +39,11 @@ const AlertList = ({ alerts, onEditAlert }) => {
             <div className="alert-details">
               {editingAlertId === alert.id ? (
                 <>
-                  <p><strong>Expiry Date:</strong> 
-                    <input type="datetime-local" value={editedAlert.datetime} onChange={(e) => handleInputChange('datetime', e.target.value)} />
-                  </p>
                   <p><strong>Cryptocurrency:</strong> 
                     <select value={editedAlert.cryptocurrency} onChange={(e) => handleInputChange('cryptocurrency', e.target.value)}>
-                      <option value="Bitcoin">Bitcoin</option>
-                      <option value="Ethereum">Ethereum</option>
-                      <option value="Ripple">Ripple</option>
+                      <option value="Bitcoin">BTC</option>
+                      <option value="Ethereum">ETH</option>
+                      <option value="Ton">TON</option>
                       {/* Add more cryptocurrencies as needed */}
                     </select>
                   </p>
@@ -57,12 +54,18 @@ const AlertList = ({ alerts, onEditAlert }) => {
                       {/* Add more types as needed */}
                     </select>
                   </p>
+                  <p><strong>Value:</strong> 
+                    <input type="text" value={editedAlert.value} onChange={(e) => handleInputChange('value', e.target.value)} />
+                  </p>
+                  <p><strong>Expiry Date:</strong> 
+                    <input type="datetime-local" value={editedAlert.datetime} onChange={(e) => handleInputChange('datetime', e.target.value)} />
+                  </p>
                 </>
               ) : (
                 <>
-                  <p><strong>Date and Time:</strong> {alert.datetime}</p>
                   <p><strong>Cryptocurrency:</strong> {alert.cryptocurrency}</p>
                   <p><strong>Type:</strong> {alert.type}</p>
+                  <p><strong>Value:</strong> {alert.type}</p>
                   <p><strong>Expiry Date:</strong> {alert.expiryDate}</p>
                 </>
               )}
