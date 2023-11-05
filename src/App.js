@@ -7,27 +7,23 @@ const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
 
+
 function App() {
-  const typeOptions = ['BTC', 'ETH', 'TON'];
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    tele.ready();
+  })
 
   const handleSaveAlert = (newAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };
 
   const handleEditAlert = (editedAlert) => {
-    // Handle the edited alert, e.g., update the state
     console.log('Edited Alert:', editedAlert);
   };
 
-  const [alerts, setAlerts] = useState([
-    { id: 1, cryptocurrency: 'BTC', type: "amount", value: "30000", currency: "USD", expiryDate: '2023-11-10' },
-    { id: 2, cryptocurrency: 'ETH', type: "percent", value: "50", currency: "USD", expiryDate: '2023-11-15' },
-    { id: 3, cryptocurrency: 'TON', type: "percent", value: "20", currency: "USD", expiryDate: '2023-11-15' },
-  ]);
-
-  useEffect(() => {
-    tele.ready();
-  });
+  const [alerts, setAlerts] = useState([]);
 
   return (
     <div className="container">
