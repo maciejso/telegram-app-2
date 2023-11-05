@@ -1,7 +1,6 @@
 /* AlertList.css */
 .alert-list-container {
   max-width: 600px;
-  min-width: 320px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -28,6 +27,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .alert-list li.editing {
@@ -38,6 +38,24 @@ h2 {
   flex-grow: 1;
 }
 
+.alert-details p {
+  margin: 5px 0;
+}
+
+.alert-details input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.alert-actions {
+  display: flex;
+  align-items: center;
+}
+
 .alert-actions button {
   background-color: #4caf50;
   color: #fff;
@@ -45,6 +63,7 @@ h2 {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .alert-actions button:hover {
