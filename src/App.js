@@ -7,7 +7,7 @@ const { getData } = require("./db/db");
 const tele = window.Telegram.WebApp;
 
 function App() {
-   const typeOptions = ['BTC', 'ETH', 'TON'];
+  const typeOptions = ['BTC', 'ETH', 'TON'];
 
   const handleSaveAlert = (newAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="container">
-       <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
+      <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
       <Alert />
     </div>
   );

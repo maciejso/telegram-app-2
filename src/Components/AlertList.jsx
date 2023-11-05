@@ -65,7 +65,7 @@ const AlertList = ({ alerts, onEditAlert }) => {
                 <>
                   <p><strong>Cryptocurrency:</strong> {alert.cryptocurrency}</p>
                   <p><strong>Type:</strong> {alert.type}</p>
-                  <p><strong>Value:</strong> {alert.type}</p>
+                  <p><strong>Value:</strong> {alert.value}</p>
                   <p><strong>Expiry Date:</strong> {alert.expiryDate}</p>
                 </>
               )}

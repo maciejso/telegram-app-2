@@ -40,13 +40,6 @@ const Alert = () => {
     <div className="alert-container">
       <h2>Add Cryptocurrency Alert</h2>
 
-      <div className="form-group">
-        <label htmlFor="datetimePicker">Select Date and Time:</label>
-        <DateTimePicker
-          value={alert.expirtyDate}
-          onChange={(value) => handleInputChange('datetime', value)}
-        />
-      </div>
 
       <div className="form-group">
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
@@ -65,12 +58,17 @@ const Alert = () => {
           onChange={(value) => handleInputChange('type', value)}
         />
       </div>
+      <div className="form-group">
+        <label htmlFor="value">Value</label>
+        <input type="text" value={alert.value} onChange={(value) => handleInputChange('value', value)}
+        ></input>
+      </div>
 
       <div className="form-group">
-        <label htmlFor="expiryDatePicker">Select Expiry Date:</label>
+        <label htmlFor="datetimePicker">Expirty Date:</label>
         <DateTimePicker
-          value={alert.expiryDate}
-          onChange={(value) => handleInputChange('expiryDate', value)}
+          value={alert.expirtyDate}
+          onChange={(value) => handleInputChange('datetime', value)}
         />
       </div>
 
