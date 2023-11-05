@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Alert from './Components/Alert'
+import AlertList from "./Components/AlertList";
 const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
@@ -8,15 +9,19 @@ const tele = window.Telegram.WebApp;
 function App() {
    const typeOptions = ['BTC', 'ETH', 'TON'];
 
-  const handleTypeSelect = (selectedType) => {
-    console.log('Selected Type:', selectedType);
-    // Handle the selected type as needed
+  const handleSaveAlert = (newAlert) => {
+    setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+  };
+
+  const handleEditAlert = (editedAlert) => {
+    // Handle the edited alert, e.g., update the state
+    console.log('Edited Alert:', editedAlert);
   };
 
   const [alerts, setAlerts] = useState([
-    { id: 1, cryptocurrency: 'BTC', dueDate: '2023-11-10' },
-    { id: 2, cryptocurrency: 'ETH', dueDate: '2023-11-15' },
-    { id: 3, cryptocurrency: 'TON', dueDate: '2023-11-15' },
+    { id: 1, cryptocurrency: 'BTC', type: "amount", value: "300000", currency: "USD", expiryDate: '2023-11-10' },
+    { id: 2, cryptocurrency: 'ETH', type: "percent", value: "50", currency: "USD", expiryDate: '2023-11-15' },
+    { id: 3, cryptocurrency: 'TON', type: "percent", value: "20", currency: "USD", expiryDate: '2023-11-15' },
   ]);
 
   useEffect(() => {
@@ -25,19 +30,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="alert-list">
-        <h1>Cryptocurrencies</h1>
-        <p></p>
-        <h1>My Alerts</h1>
-        <ul>
-          {alerts.map((todo) => (
-            <li key={todo.id} className={new Date(todo.dueDate) < new Date() ? ' overdue' : ''}>
-              <span>{todo.cryptocurrency}</span>
-              <span className="due-date">Due: {todo.dueDate}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+       <AlertList alerts={alerts} onEditAlert={handleEditAlert} />
       <Alert />
     </div>
   );

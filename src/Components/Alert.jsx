@@ -51,7 +51,7 @@ const Alert = () => {
       <div className="form-group">
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
         <Dropdown
-          options={['Bitcoin', 'Ethereum', 'Ripple']} // Add more cryptocurrencies as needed
+          options={['Bitcoin', 'Ethereum', 'Ton']} // Add more cryptocurrencies as needed
           value={alert.cryptocurrency}
           onChange={(value) => handleInputChange('cryptocurrency', value)}
         />
@@ -74,7 +74,7 @@ const Alert = () => {
         />
       </div>
 
-      <button className="save-button" onClick={handleSaveAlert}>
+      <button className="save-button" type="submit" onClick={handleSaveAlert}>
         Save Alert
       </button>
     </div>
