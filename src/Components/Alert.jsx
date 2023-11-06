@@ -18,8 +18,8 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
 const Alert = () => {
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
-    type: 'value',
-    value: '50000',
+    type: 'value_change',
+    value: '2000',
     expiryDate: "2023-12-31T23:59"
   });
 
