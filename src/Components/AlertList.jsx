@@ -148,7 +148,7 @@ const AlertList = () => {
                       <strong>Expiry Date:</strong>
                       <input
                         type="datetime-local"
-                        value={editedAlert.expires_at || ''}
+                        value={convertToISODateTime(editedAlert.expires_at) || ''}
                         onChange={(e) => handleInputChange('expires_at', e.target.value)}
                       />
                     </p>
@@ -182,4 +182,11 @@ const AlertList = () => {
   );
 };
 
+function convertDateFormat(inputDateString) {
+  const originalDate = new Date(inputDateString);
+  const formattedDate = `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1).toString().padStart(2, '0')}-${originalDate.getDate().toString().padStart(2, '0')}T${originalDate.getHours().toString().padStart(2, '0')}:${originalDate.getMinutes().toString().padStart(2, '0')}`;
+  return formattedDate;
+}
+
 export default AlertList;
+
