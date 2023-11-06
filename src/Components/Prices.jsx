@@ -39,7 +39,7 @@ const Prices = ({ cryptoData, onCryptoDataChange }) => {
                     {cryptoData && cryptoData.map((crypto) => (
                         <li key={crypto.id} className="coin-list-item">
                             <span className="coin-name">{crypto.cryptocurrency}</span>
-                            <span className="coin-price">${crypto.value}</span>
+                            <span className="coin-price">${crypto.value.toFixed(2)}</span>
                         </li>
                     ))}
                 </ul>
