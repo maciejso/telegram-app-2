@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Alert.css';
+      
+const url = 'http://localhost:5000/alerts';
 
 const trigger_type = ["value_change", "percent_change"]
 
@@ -7,7 +9,7 @@ const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
 );
 
-const Dropdown = ({ options, selectedOption, onChange }) => ( 
+const Dropdown = ({ options, selectedOption, onChange }) => (
   <select value={selectedOption} onChange={(e) => onChange(e.target.value)}>
     {options.map((option) => (
       <option key={option} value={option}>
@@ -32,8 +34,24 @@ const Alert = () => {
     }));
   };
 
-  const handleSaveAlert = () => {
-    console.log('Alert saved:', alert);
+  const handleSaveAlert = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/alerts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(alert),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save alert');
+      }
+
+      console.log('Alert saved successfully');
+    } catch (error) {
+      console.error('Error saving alert:', error);
+    }
   };
 
   return (
@@ -43,8 +61,8 @@ const Alert = () => {
       <div className="form-group">
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
         <Dropdown
-          options={['BTC', 'ETH', 'TON']} 
-          selectedOption={alert.cryptocurrency} 
+          options={['BTC', 'ETH', 'TON']}
+          selectedOption={alert.cryptocurrency}
           onChange={(value) => handleInputChange('cryptocurrency', value)}
         />
       </div>
@@ -53,7 +71,7 @@ const Alert = () => {
         <label htmlFor="typePicker">Select Type:</label>
         <Dropdown
           options={['Percent Change', 'Value Change']}
-          selectedOption={alert.type} 
+          selectedOption={alert.type}
           onChange={(value) => handleInputChange('type', value)}
         />
       </div>
