@@ -22,7 +22,7 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
 const Alert = ({ cryptoData }) => {
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
-    type: 'value_change',
+    type: 'Value Change',
     value: '2000',
     expiryDate: "2023-12-31T23:59"
   });
@@ -37,6 +37,8 @@ const Alert = ({ cryptoData }) => {
   const handleSaveAlert = async () => {
     try {
       const currentPrice = cryptoData.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
+      console.log(alert.type)
+      console.log(trigger_type[alert.type])
       const alertWithPrice = {
         cryptocurrency: alert.cryptocurrency,
         trigger_value: parseInt(alert.value, 10),

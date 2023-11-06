@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 
-const url = "http://localhost:5000/alerts?state=active"
+const url = "http://localhost:5000/alerts"
 
 const AlertList = () => {
   const [alerts, setAlerts] = useState([]);
@@ -38,6 +38,23 @@ const AlertList = () => {
     fetchData();
   }, []);
 
+
+  const handleDeleteClick = async (alertId) => {
+    try {
+      const response = await fetch(url+"/"+alertId, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete alert');
+      }
+
+      setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== alertId));
+      console.log('Alert deleted successfully');
+    } catch (error) {
+      console.error('Error deleting alert:', error);
+    }
+  };
 
   const handleEditClick = (alertId) => {
     setEditingAlertId(alertId);
@@ -111,7 +128,7 @@ const AlertList = () => {
                 ) : (
                   <div className="alert-actions-delete">
                   <button onClick={() => handleEditClick(alert.id)}>Edit</button>
-                  <button className="btn-delete" onClick={() => handleEditClick(alert.id)}>Delete</button>
+                  <button className="btn-delete" onClick={() => handleDeleteClick(alert.id)}>Delete</button>
                   </div>
                 )}
               </div>
