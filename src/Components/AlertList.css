@@ -26,6 +26,15 @@
   margin-top: 10px;
 }
 
+.alert-actions-delete {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-actions-delete .btn-delete {
+  background-color: #c9302c
+}
+
 .alert-actions button {
   background-color: #2196F3;
   color: #fff;

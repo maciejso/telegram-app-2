@@ -109,7 +109,10 @@ const AlertList = () => {
                     <button onClick={handleSaveEdit}>Save</button>
                   </>
                 ) : (
+                  <div className="alert-actions-delete">
                   <button onClick={() => handleEditClick(alert.id)}>Edit</button>
+                  <button className="btn-delete" onClick={() => handleEditClick(alert.id)}>Delete</button>
+                  </div>
                 )}
               </div>
             </li>
