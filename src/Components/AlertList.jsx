@@ -1,4 +1,3 @@
-// AlertList.js
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 
