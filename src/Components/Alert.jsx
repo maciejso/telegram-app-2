@@ -3,7 +3,7 @@ import './Alert.css';
 
 const url = 'http://localhost:5000/alerts';
 
-const trigger_type = {"Value_Change": "value_change", "Percent Change": "percent_change"}
+const trigger_type = {"Value Change": "value_change", "Percent Change": "percent_change"}
 
 const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
@@ -37,7 +37,6 @@ const Alert = ({ cryptoData }) => {
   const handleSaveAlert = async () => {
     try {
       const currentPrice = cryptoData.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
-
       const alertWithPrice = {
         cryptocurrency: alert.cryptocurrency,
         trigger_value: parseInt(alert.value, 10),
