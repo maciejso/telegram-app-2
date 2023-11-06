@@ -94,6 +94,10 @@ const AlertList = () => {
       }
 
       console.log('Alert edited successfully');
+    setAlerts((prevAlerts) =>
+      prevAlerts.map((alert) =>
+        alert.id === editingAlertId ? { ...alert, ...editedAlert } : alert
+      ));
     } catch (error) {
       console.error('Error editing alert:', error);
     }
@@ -119,15 +123,15 @@ const AlertList = () => {
                   <>
                     <p><strong>Cryptocurrency:</strong>
                       <select value={editedAlert.cryptocurrency} onChange={(e) => handleInputChange('cryptocurrency', e.target.value)}>
-                        <option value="Bitcoin">BTC</option>
-                        <option value="Ethereum">ETH</option>
-                        <option value="Ton">TON</option>
+                        <option value="BTC">BTC</option>
+                        <option value="ETH">ETH</option>
+                        <option value="TON">TON</option>
                       </select>
                     </p>
                     <p><strong>Type:</strong>
                       <select value={editedAlert.trigger_type} onChange={(e) => handleInputChange('trigger_type', e.target.value)}>
-                        <option value="Percent Change">Percent Change</option>
-                        <option value="Value Change">Value Change</option>
+                        <option value="percent_change">Percent Change</option>
+                        <option value="value_change">Value Change</option>
                       </select>
                     </p>
                     <p><strong>Value:</strong>
