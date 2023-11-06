@@ -19,6 +19,7 @@ const AlertList = () => {
     console.log('Edited Alert:', editedAlert);
   };
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {

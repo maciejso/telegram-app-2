@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css';
 
-const Prices = ({ cryptoData, onCryptoDataChange }) => {
+const Prices = ({ cryptoPrices, onCryptoDataChange }) => {
     
     const [loading, setLoading] = useState(true);
 
@@ -36,7 +36,7 @@ const Prices = ({ cryptoData, onCryptoDataChange }) => {
                 <p>Loading...</p>
             ) : (
                 <ul className="coin-list">
-                    {cryptoData && cryptoData.map((crypto) => (
+                    {cryptoPrices && cryptoPrices.map((crypto) => (
                         <li key={crypto.id} className="coin-list-item">
                             <span className="coin-name">{crypto.cryptocurrency}</span>
                             <span className="coin-price">${crypto.value.toFixed(2)}</span>

@@ -9,7 +9,7 @@ const tele = window.Telegram.WebApp;
 
 
 function App() {
-  const [cryptoData, setCryptoData] = useState([]);
+  const [cryptoPrices, setCryptoPrices] = useState([]);
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
     type: 'Value Change',
@@ -25,20 +25,20 @@ function App() {
   };
 
   const handleCryptoDataChange = (data) => {
-    setCryptoData(data);
+    setCryptoPrices(data);
   };
 
 
   useEffect(() => {
     tele.ready();
-  })
+  },[alert, cryptoPrices])
 
   return (
     <div className="container">
       <h1>Crypto Alerts</h1>
-      <Prices cryptoData={cryptoData} onCryptoDataChange={handleCryptoDataChange} />
-      <AlertList />
-      <Alert cryptoData={cryptoData} alert={alert} handleInputChange={handleInputChange}/>
+      <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
+      <AlertList onUpdate={handleCryptoDataChange} />
+      <Alert cryptoPrices={cryptoPrices} alert={alert} handleInputChange={handleInputChange}/>
     </div>
   );
 };

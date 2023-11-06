@@ -19,11 +19,11 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = ({ cryptoData, alert, handleInputChange }) => {
+const Alert = ({ cryptoPrices, alert, handleInputChange }) => {
 
   const handleSaveAlert = async () => {
     try {
-      const currentPrice = cryptoData.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
+      const currentPrice = cryptoPrices.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
       //console.log(trigger_type[alert.type])
       const alertWithPrice = {
         cryptocurrency: alert.cryptocurrency,
