@@ -9,13 +9,10 @@ const tele = window.Telegram.WebApp;
 
 
 function App() {
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     tele.ready();
   })
-
-
 
   return (
     <div className="container">
