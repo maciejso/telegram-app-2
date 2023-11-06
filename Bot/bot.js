@@ -14,16 +14,16 @@ bot.use((ctx, next) => {
 
 
 bot.hears('alert', (ctx) => {
-  const keyboard = Markup.keyboard([
-    ['Lanuch Crypto Alert mini App'],
-  ]).resize();
+    const keyboard = Markup.inlineKeyboard([
+    Markup.button.callback('Launch Mini App', 'launch_mini_app'),
+  ]);
 
-  return ctx.reply('Choose an option:', keyboard);
+  return ctx.reply('Launch Crypto Alert mini App:', keyboard);
 });
 
 bot.command('alert', async (ctx) => {
   const keyboard = Markup.inlineKeyboard([
-    Markup.button.callback('Launch Mini App', 'launch_mini_app'),
+    Markup.button.callback('Launch Crypt Alert mini App', 'launch_mini_app'),
   ]);
 
   await ctx.reply('Click the button to launch the mini app:', keyboard);
