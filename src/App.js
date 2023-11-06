@@ -9,11 +9,24 @@ const tele = window.Telegram.WebApp;
 
 
 function App() {
-   const [cryptoData, setCryptoData] = useState([]);
+  const [cryptoData, setCryptoData] = useState([]);
+  const [alert, setAlert] = useState({
+    cryptocurrency: 'BTC',
+    type: 'Value Change',
+    value: '20',
+    expiryDate: "2023-12-31T23:59"
+  });
 
-    const handleCryptoDataChange = (data) => {
-        setCryptoData(data);
-    };
+  const handleInputChange = (field, value) => {
+    setAlert((prevAlert) => ({
+      ...prevAlert,
+      [field]: value,
+    }));
+  };
+
+  const handleCryptoDataChange = (data) => {
+    setCryptoData(data);
+  };
 
 
   useEffect(() => {
@@ -25,7 +38,7 @@ function App() {
       <h1>Crypto Alerts</h1>
       <Prices cryptoData={cryptoData} onCryptoDataChange={handleCryptoDataChange} />
       <AlertList />
-      <Alert cryptoData={cryptoData} />
+      <Alert cryptoData={cryptoData} alert={alert} handleInputChange={handleInputChange}/>
     </div>
   );
 };
