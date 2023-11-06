@@ -32,7 +32,11 @@
 }
 
 .alert-actions-delete .btn-delete {
-  background-color: #c9302c
+  background-color: #d9534f;
+}
+
+.alert-actions-delete .btn-delete:hover {
+  background-color: #c9302c;
 }
 
 .alert-actions button {
