@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Alert.css';
 
+const trigger_type = ["value_change", "percent_change"]
+
 const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
 );
