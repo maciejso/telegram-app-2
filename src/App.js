@@ -39,6 +39,7 @@ function App() {
       <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
       <AlertList onUpdate={handleCryptoDataChange} />
       <Alert cryptoPrices={cryptoPrices} alert={alert} handleInputChange={handleInputChange}/>
+      <p>by Mac</p>
     </div>
   );
 };
