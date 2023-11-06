@@ -30,8 +30,9 @@ const Prices = ({ cryptoPrices, onCryptoDataChange }) => {
     }, []);
 
     return (
+        <>
+        <h2 className="coin-prices-header">Current Prices</h2>
         <div className="coin-prices-container">
-            <h2 className="coin-prices-header">Current Prices</h2>
             {loading ? (
                 <p>Loading...</p>
             ) : (
@@ -47,6 +48,7 @@ const Prices = ({ cryptoPrices, onCryptoDataChange }) => {
 
 
         </div>
+        </>
     );
 };
 

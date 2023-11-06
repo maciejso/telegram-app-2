@@ -3,7 +3,7 @@ import './Alert.css';
 
 const url = 'http://localhost:5000/alerts';
 
-const trigger_type = {"Value Change": "value_change", "Percent Change": "percent_change"}
+const trigger_type = { "Value Change": "value_change", "Percent Change": "percent_change" }
 
 const DateTimePicker = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
@@ -55,48 +55,51 @@ const Alert = ({ cryptoPrices, alert, handleInputChange }) => {
   };
 
   return (
-    <div className="alert-container">
+
+    <>
       <h2>Add Alert</h2>
+      <div className="alert-container">
 
-      <div className="form-group">
-        <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
-        <Dropdown
-          options={['BTC', 'ETH', 'TON']}
-          selectedOption={alert.cryptocurrency}
-          onChange={(value) => handleInputChange('cryptocurrency', value)}
-        />
+        <div className="form-group">
+          <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
+          <Dropdown
+            options={['BTC', 'ETH', 'TON']}
+            selectedOption={alert.cryptocurrency}
+            onChange={(value) => handleInputChange('cryptocurrency', value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="typePicker">Select Type:</label>
+          <Dropdown
+            options={['Percent Change', 'Value Change']}
+            selectedOption={alert.type}
+            onChange={(value) => handleInputChange('type', value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="value">Value {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
+          <input
+            type="text"
+            value={alert.value}
+            onChange={(e) => handleInputChange('value', e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="datetimePicker">Expiry Date:</label>
+          <DateTimePicker
+            value={alert.expiryDate}
+            onChange={(value) => handleInputChange('expiryDate', value)}
+          />
+        </div>
+
+        <button className="save-button" type="submit" onClick={handleSaveAlert}>
+          Save Alert
+        </button>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="typePicker">Select Type:</label>
-        <Dropdown
-          options={['Percent Change', 'Value Change']}
-          selectedOption={alert.type}
-          onChange={(value) => handleInputChange('type', value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="value">Value {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
-        <input
-          type="text"
-          value={alert.value}
-          onChange={(e) => handleInputChange('value', e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="datetimePicker">Expiry Date:</label>
-        <DateTimePicker
-          value={alert.expiryDate}
-          onChange={(value) => handleInputChange('expiryDate', value)}
-        />
-      </div>
-
-      <button className="save-button" type="submit" onClick={handleSaveAlert}>
-        Save Alert
-      </button>
-    </div>
+    </>
   );
 };
 
