@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Alert.css';
-      
+
 const url = 'http://localhost:5000/alerts';
 
 const trigger_type = ["value_change", "percent_change"]
@@ -19,7 +19,7 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = () => {
+const Alert = ({ cryptoData }) => {
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
     type: 'value_change',
@@ -36,12 +36,23 @@ const Alert = () => {
 
   const handleSaveAlert = async () => {
     try {
+      const currentPrice = cryptoData.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
+
+      const alertWithPrice = {
+        cryptocurrency: alert.cryptocurrency,
+        trigger_value: parseInt(alert.value, 10),
+        trigger_type: alert.type,
+        base_value: currentPrice,
+        user_id: "mac",
+        expires_at: alert.expiryDate
+      };
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(alert),
+        body: JSON.stringify(alertWithPrice),
       });
 
       if (!response.ok) {
