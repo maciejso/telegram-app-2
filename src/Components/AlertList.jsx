@@ -67,25 +67,30 @@ const AlertList = () => {
   const handleCancelEdit = () => {
     setEditingAlertId(null);
     setEditedAlert({});
+    console.log("Edit cancelled")
   };
 
   const handleSaveEdit = async () => {
     onEditAlert(editedAlert);
     setEditingAlertId(null);
     setEditedAlert({});
+    setAlerts((prevAlerts) =>
+      prevAlerts.map((alert) =>
+        alert.id === editingAlertId ? { ...alert, ...editedAlert, expires_at: new Date(editedAlert.expires_at).toUTCString() } : alert
+      ));
     try {
       console.log(editedAlert)
-      const editedAlertWithNumberValue = {
+      const editedAlertConverted = {
         ...editedAlert,
         trigger_value: parseFloat(editedAlert.trigger_value),
-        expires_at: convertDateFormat(editedAlert.expires_at)
+        expires_at: editedAlert.expires_at
       };
 
       const response = await fetch(url + "/" + editingAlertId, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(editedAlertWithNumberValue),
+        body: JSON.stringify(editedAlertConverted),
         method: 'PUT',
       });
 
@@ -94,10 +99,6 @@ const AlertList = () => {
       }
 
       console.log('Alert edited successfully');
-    setAlerts((prevAlerts) =>
-      prevAlerts.map((alert) =>
-        alert.id === editingAlertId ? { ...alert, ...editedAlert } : alert
-      ));
     } catch (error) {
       console.error('Error editing alert:', error);
     }
@@ -193,12 +194,6 @@ const convertToISODateTime = (value) => {
   }
   return value;
 };
-
-function convertDateFormat(inputDateString) {
-  const originalDate = new Date(inputDateString);
-  const formattedDate = `${originalDate.getFullYear()}-${(originalDate.getMonth() + 1).toString().padStart(2, '0')}-${originalDate.getDate().toString().padStart(2, '0')}T${originalDate.getHours().toString().padStart(2, '0')}:${originalDate.getMinutes().toString().padStart(2, '0')}`;
-  return formattedDate;
-}
 
 export default AlertList;
 
