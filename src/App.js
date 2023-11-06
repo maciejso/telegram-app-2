@@ -9,6 +9,12 @@ const tele = window.Telegram.WebApp;
 
 
 function App() {
+   const [cryptoData, setCryptoData] = useState([]);
+
+    const handleCryptoDataChange = (data) => {
+        setCryptoData(data);
+    };
+
 
   useEffect(() => {
     tele.ready();
@@ -17,9 +23,9 @@ function App() {
   return (
     <div className="container">
       <h1>Crypto Alerts</h1>
-      <Prices />
+      <Prices cryptoData={cryptoData} onCryptoDataChange={handleCryptoDataChange} />
       <AlertList />
-      <Alert />
+      <Alert cryptoData={cryptoData} />
     </div>
   );
 };

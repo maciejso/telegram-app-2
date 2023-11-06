@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css';
 
-const Prices = ({ apiKey }) => {
-    const [cryptoData, setCryptoData] = useState([]);
+const Prices = ({ cryptoData, onCryptoDataChange }) => {
+    
     const [loading, setLoading] = useState(true);
 
     const url = "http://localhost:5000/prices"
@@ -10,14 +10,7 @@ const Prices = ({ apiKey }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(
-                    url,
-                    {
-                        headers: {
-                            'X-CMC_PRO_API_KEY': apiKey,
-                        },
-                    }
-                );
+                const response = await fetch(url);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
@@ -25,7 +18,7 @@ const Prices = ({ apiKey }) => {
 
                 const data = await response.json();
                 console.log(data)
-                setCryptoData(data);
+                onCryptoDataChange(data);
                 setLoading(false);
             } catch (error) {
                 console.error(error);

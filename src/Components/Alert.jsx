@@ -36,7 +36,7 @@ const Alert = () => {
 
   const handleSaveAlert = async () => {
     try {
-      const response = await fetch('http://localhost:5000/alerts', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
