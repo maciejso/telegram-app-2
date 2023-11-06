@@ -52,7 +52,9 @@ bot.command('quit', async (ctx) => {
 })
 
 bot.on(message('text'), async (ctx) => {
-  await ctx.reply(`${ctx.message.text}`)
+  // await ctx.reply(`${ctx.message.text}`)
+  const userName = ctx.message.from.first_name;
+  await ctx.reply(`Hi ${userName}! How can I help you.`);
 })
 
 bot.on('callback_query', async (ctx) => {
