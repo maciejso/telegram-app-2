@@ -28,10 +28,10 @@ const AlertList = () => {
         const data = await response.json();
         console.log(data);
         setAlerts(data);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         console.error(error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -41,7 +41,7 @@ const AlertList = () => {
 
   const handleDeleteClick = async (alertId) => {
     try {
-      const response = await fetch(url+"/"+alertId, {
+      const response = await fetch(url + "/" + alertId, {
         method: 'DELETE',
       });
 
@@ -66,10 +66,28 @@ const AlertList = () => {
     setEditedAlert({});
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     onEditAlert(editedAlert);
     setEditingAlertId(null);
     setEditedAlert({});
+    try {
+      console.log(editedAlert)
+      const response = await fetch(url + "/" + editingAlertId, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editedAlert),
+        method: 'PUT',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to edit alert');
+      }
+
+      console.log('Alert edited successfully');
+    } catch (error) {
+      console.error('Error editing alert:', error);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -114,7 +132,7 @@ const AlertList = () => {
                   <>
                     <p><strong>Cryptocurrency: </strong> {alert.cryptocurrency}</p>
                     <p><strong>Type: </strong> {alert.trigger_type}</p>
-                    <p><strong>Value: </strong>{ alert.trigger_type == "value_change" ? "$" : ""} {alert.trigger_value}{alert.trigger_type == "percent_change" ? "%" : ""}</p>
+                    <p><strong>Value: </strong>{alert.trigger_type == "value_change" ? "$" : ""} {alert.trigger_value}{alert.trigger_type == "percent_change" ? "%" : ""}</p>
                     <p><strong>Expiry Date :</strong> {alert.expires_at}</p>
                   </>
                 )}
@@ -127,8 +145,8 @@ const AlertList = () => {
                   </>
                 ) : (
                   <div className="alert-actions-delete">
-                  <button onClick={() => handleEditClick(alert.id)}>Edit</button>
-                  <button className="btn-delete" onClick={() => handleDeleteClick(alert.id)}>Delete</button>
+                    <button onClick={() => handleEditClick(alert.id)}>Edit</button>
+                    <button className="btn-delete" onClick={() => handleDeleteClick(alert.id)}>Delete</button>
                   </div>
                 )}
               </div>
