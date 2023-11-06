@@ -28,10 +28,10 @@ const AlertList = () => {
         const data = await response.json();
         console.log(data);
         setAlerts(data);
-        setLoading(false);  // Update loading state
+        setLoading(false); 
       } catch (error) {
         console.error(error);
-        setLoading(false);  // Update loading state in case of error
+        setLoading(false); 
       }
     };
 
