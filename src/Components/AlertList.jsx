@@ -40,19 +40,6 @@ const AlertList = () => {
     fetchData();
   }, []);
 
-  const convertToISODateTime = (value) => {
-    const dateObject = new Date(value);
-    if (!isNaN(dateObject.getTime())) {
-      const year = dateObject.getFullYear();
-      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-      const day = dateObject.getDate().toString().padStart(2, '0');
-      const hours = dateObject.getHours().toString().padStart(2, '0');
-      const minutes = dateObject.getMinutes().toString().padStart(2, '0');
-
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
-    return value;
-  };
 
   const handleDeleteClick = async (alertId) => {
     try {
@@ -90,6 +77,7 @@ const AlertList = () => {
       const editedAlertWithNumberValue = {
         ...editedAlert,
         trigger_value: parseFloat(editedAlert.trigger_value),
+        expires_at: convertDateFormat(editedAlert.expires_at)
       };
 
       const response = await fetch(url + "/" + editingAlertId, {
@@ -181,6 +169,20 @@ const AlertList = () => {
     </div>
   );
 };
+
+  const convertToISODateTime = (value) => {
+    const dateObject = new Date(value);
+    if (!isNaN(dateObject.getTime())) {
+      const year = dateObject.getFullYear();
+      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+      const day = dateObject.getDate().toString().padStart(2, '0');
+      const hours = dateObject.getHours().toString().padStart(2, '0');
+      const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    return value;
+  };
 
 function convertDateFormat(inputDateString) {
   const originalDate = new Date(inputDateString);
