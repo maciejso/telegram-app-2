@@ -13,10 +13,9 @@ bot.use((ctx, next) => {
 });
 
 
-bot.hears('Show Reply Keyboard', (ctx) => {
+bot.hears('alert', (ctx) => {
   const keyboard = Markup.keyboard([
-    ['Button 1', 'Button 2'],
-    ['Button 3'],
+    ['Lanuch Crypto Alert mini App'],
   ]).resize();
 
   return ctx.reply('Choose an option:', keyboard);
