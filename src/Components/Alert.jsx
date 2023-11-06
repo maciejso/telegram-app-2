@@ -88,7 +88,7 @@ const Alert = ({ cryptoData }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="value">Value (USD):</label>
+        <label htmlFor="value">Value {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
         <input
           type="text"
           value={alert.value}
