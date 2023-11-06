@@ -42,7 +42,7 @@ const Alert = () => {
         <label htmlFor="cryptocurrencyPicker">Select Cryptocurrency:</label>
         <Dropdown
           options={['BTC', 'ETH', 'TON']} 
-          selectedOption={alert.cryptocurrency} // Change 'value' to 'selectedOption'
+          selectedOption={alert.cryptocurrency} 
           onChange={(value) => handleInputChange('cryptocurrency', value)}
         />
       </div>
@@ -51,7 +51,7 @@ const Alert = () => {
         <label htmlFor="typePicker">Select Type:</label>
         <Dropdown
           options={['Percent Change', 'Value Change']}
-          selectedOption={alert.type} // Change 'value' to 'selectedOption'
+          selectedOption={alert.type} 
           onChange={(value) => handleInputChange('type', value)}
         />
       </div>
