@@ -146,7 +146,12 @@ const AlertList = () => {
                   <>
                     <p><strong>Cryptocurrency: </strong> {alert.cryptocurrency}</p>
                     <p><strong>Type: </strong> {alert.trigger_type}</p>
-                    <p><strong>Value: </strong>{alert.trigger_type == "value_change" ? "$" : ""} {alert.trigger_value}{alert.trigger_type == "percent_change" ? "%" : ""}</p>
+                    <p>
+                      <strong>Value: </strong>
+                      {alert.trigger_type === "value_change" ? `$${alert.trigger_value}` : alert.trigger_value}
+                      {alert.trigger_type === "percent_change" && "%"}
+                    </p>
+
                     <p><strong>Expiry Date :</strong> {alert.expires_at}</p>
                   </>
                 )}
@@ -171,19 +176,19 @@ const AlertList = () => {
   );
 };
 
-  const convertToISODateTime = (value) => {
-    const dateObject = new Date(value);
-    if (!isNaN(dateObject.getTime())) {
-      const year = dateObject.getFullYear();
-      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-      const day = dateObject.getDate().toString().padStart(2, '0');
-      const hours = dateObject.getHours().toString().padStart(2, '0');
-      const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+const convertToISODateTime = (value) => {
+  const dateObject = new Date(value);
+  if (!isNaN(dateObject.getTime())) {
+    const year = dateObject.getFullYear();
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObject.getDate().toString().padStart(2, '0');
+    const hours = dateObject.getHours().toString().padStart(2, '0');
+    const minutes = dateObject.getMinutes().toString().padStart(2, '0');
 
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
-    return value;
-  };
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+  return value;
+};
 
 function convertDateFormat(inputDateString) {
   const originalDate = new Date(inputDateString);
