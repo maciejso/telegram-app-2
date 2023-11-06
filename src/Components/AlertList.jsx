@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 
+
+//const defaultValue = `${year}-${month}-${day}T${hours}:${minutes}`;
 const url = "http://localhost:5000/alerts"
 
 const AlertList = () => {
@@ -38,6 +40,19 @@ const AlertList = () => {
     fetchData();
   }, []);
 
+  const convertToISODateTime = (value) => {
+    const dateObject = new Date(value);
+    if (!isNaN(dateObject.getTime())) {
+      const year = dateObject.getFullYear();
+      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+      const day = dateObject.getDate().toString().padStart(2, '0');
+      const hours = dateObject.getHours().toString().padStart(2, '0');
+      const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    return value;
+  };
 
   const handleDeleteClick = async (alertId) => {
     try {
@@ -72,11 +87,16 @@ const AlertList = () => {
     setEditedAlert({});
     try {
       console.log(editedAlert)
+      const editedAlertWithNumberValue = {
+        ...editedAlert,
+        trigger_value: parseFloat(editedAlert.trigger_value),
+      };
+
       const response = await fetch(url + "/" + editingAlertId, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(editedAlert),
+        body: JSON.stringify(editedAlertWithNumberValue),
         method: 'PUT',
       });
 
@@ -93,7 +113,7 @@ const AlertList = () => {
   const handleInputChange = (field, value) => {
     setEditedAlert((prevEditedAlert) => ({
       ...prevEditedAlert,
-      [field]: value,
+      [field]: field === 'expires_at' ? convertToISODateTime(value) : value,
     }));
   };
 
@@ -116,16 +136,21 @@ const AlertList = () => {
                       </select>
                     </p>
                     <p><strong>Type:</strong>
-                      <select value={editedAlert.type} onChange={(e) => handleInputChange('type', e.target.value)}>
+                      <select value={editedAlert.trigger_type} onChange={(e) => handleInputChange('trigger_type', e.target.value)}>
                         <option value="Percent Change">Percent Change</option>
                         <option value="Value Change">Value Change</option>
                       </select>
                     </p>
                     <p><strong>Value:</strong>
-                      <input type="text" value={editedAlert.value} onChange={(e) => handleInputChange('value', e.target.value)} />
+                      <input type="text" value={editedAlert.trigger_value} onChange={(e) => handleInputChange('trigger_value', e.target.value)} />
                     </p>
-                    <p><strong>Expiry Date:</strong>
-                      <input type="datetime-local" value={editedAlert.datetime} onChange={(e) => handleInputChange('datetime', e.target.value)} />
+                    <p>
+                      <strong>Expiry Date:</strong>
+                      <input
+                        type="datetime-local"
+                        value={editedAlert.expires_at || ''}
+                        onChange={(e) => handleInputChange('expires_at', e.target.value)}
+                      />
                     </p>
                   </>
                 ) : (
