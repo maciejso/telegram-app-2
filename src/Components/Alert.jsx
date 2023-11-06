@@ -59,7 +59,7 @@ const Alert = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="value">Value:</label>
+        <label htmlFor="value">Value (USD):</label>
         <input
           type="text"
           value={alert.value}
