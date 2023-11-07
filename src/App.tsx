@@ -30,9 +30,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     tele.onEvent('mainButtonClicked', () => {
-    getUserData();
     });
     tele.ready();
+    getUserData();
     console.log("###")
   }, []);
 
