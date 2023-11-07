@@ -33,6 +33,7 @@ const App: React.FC = () => {
     getUserData();
     });
     tele.ready();
+    console.log("###")
   }, []);
 
   const onAlertUpdate = (newAlert: IAlert) => {
