@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     tele.ready();
-    setUserId(tele.WebAppUser?.id || "unknown")
+    setUserId(tele.WebAppUser?.first_name || "unknown")
   },[cryptoPrices])
 
     const onAlertUpdate= (newAlert) => setAlerts((prevAlerts) => [...prevAlerts, newAlert])
