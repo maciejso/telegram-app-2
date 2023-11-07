@@ -6,7 +6,6 @@ import './AlertList.css';
 const url = "http://localhost:5000/alerts"
 
 const AlertList = ({alerts, setAlerts}) => {
-  //const [alerts, setAlerts] = useState([]);
   const [editingAlertId, setEditingAlertId] = useState(null);
   const [editedAlert, setEditedAlert] = useState({});
   const [loading, setLoading] = useState(true);
