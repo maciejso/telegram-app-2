@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     tele.ready();
-  },[alert, cryptoPrices])
+  },[cryptoPrices])
 
   return (
     <div className="container">
