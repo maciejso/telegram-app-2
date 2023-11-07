@@ -21,10 +21,10 @@ const App: React.FC = () => {
   function getUserData() {
     const initDataUnsafe = (window as any).Telegram.WebApp.initDataUnsafe || {};
     const userId = initDataUnsafe.user && initDataUnsafe.user.id;
-    const username = initDataUnsafe.user && initDataUnsafe.user.username;
+    const firstName = initDataUnsafe.user && initDataUnsafe.user.first_name;
 
     console.log('User ID:', userId);
-    console.log('Username:', username);
+    console.log('Username:', firstName);
     setUserId(userId);
   }
 
