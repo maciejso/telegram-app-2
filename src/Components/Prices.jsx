@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css';
 
-const host = process.env.HOST || "localhost:5000"
+const host = process.env.APIHOST || "http://localhost:5000"
+console.log("host:", host)
 const url = `${host}/prices`;
 
 
