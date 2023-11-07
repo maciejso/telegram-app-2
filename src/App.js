@@ -9,6 +9,7 @@ const tele = window.Telegram.WebApp;
 
 
 function App() {
+  const [alerts, setAlerts] = useState([]);
   const [cryptoPrices, setCryptoPrices] = useState([]);
   const handleCryptoDataChange = (data) => {
     setCryptoPrices(data);
@@ -23,8 +24,8 @@ function App() {
     <div className="container">
       <h1>Crypto Alerts</h1>
       <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
-      <AlertList onUpdate={handleCryptoDataChange} />
-      <Alert cryptoPrices={cryptoPrices} />
+      <AlertList alerts={alerts} setAlerts={setAlerts} />
+      <Alert cryptoPrices={cryptoPrices} onAlertUpdate={(newAlert) => setAlerts((prevAlerts) => [...prevAlerts, newAlert])} />
       <p>by Mac</p>
     </div>
   );

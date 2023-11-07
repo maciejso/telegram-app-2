@@ -19,7 +19,7 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = ({ cryptoPrices }) => {
+const Alert = ({ cryptoPrices, onAlertUpdate }) => {
 
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
@@ -58,6 +58,12 @@ const Alert = ({ cryptoPrices }) => {
         },
         body: JSON.stringify(alertWithPrice),
       });
+      
+      const jsonResponse = await response.json();
+      onAlertUpdate({...jsonResponse, expires_at:new Date(jsonResponse["expires_at"]).toUTCString() })
+
+      console.log('Alert saved successfully');
+      console.log('Response JSON:', jsonResponse);
 
       if (!response.ok) {
         throw new Error('Failed to save alert');
