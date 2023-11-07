@@ -33,24 +33,6 @@ const App: React.FC = () => {
   });
 }, []);
 
-  if (tele.ready) {
-  // Request user data
-  tele.request({
-    // Specify the user data you want to access, for example:
-    user: {
-      id: true, // User's unique identifier
-      first_name: true, // User's first name
-      last_name: true, // User's last name
-      photo_url: true, // URL of the user's profile picture
-      auth_date: true, // Authentication date
-      hash: true // Data-check hash
-    }
-  }).then((data:any) => {
-    console.log(data);
-  }).catch((error:any) => {
-    console.error(error);
-  });
-}
   const onAlertUpdate = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };

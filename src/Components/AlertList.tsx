@@ -163,7 +163,7 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts }) => {
                     <p>
                       <strong>Value:</strong>
                       <input
-                        type="text"
+                        type="number"
                         value={editedAlert.trigger_value}
                         onChange={(e) => handleInputChange('trigger_value', e.target.value)}
                       />
