@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
+import Apihost from '../Config';
 
-
-//const defaultValue = `${year}-${month}-${day}T${hours}:${minutes}`;
-const host = process.env.APIHOST || "http://localhost:5000"
-const url = `${host}/alerts`;
+const url = `${Apihost}/alerts`;
 
 const AlertList = ({alerts, setAlerts}) => {
   const [editingAlertId, setEditingAlertId] = useState(null);

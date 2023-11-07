@@ -3,7 +3,6 @@ import "./App.css";
 import Alert from './Components/Alert'
 import AlertList from "./Components/AlertList";
 import Prices from "./Components/Prices";
-const { getData } = require("./db/db");
 
 const tele = window.Telegram.WebApp;
 

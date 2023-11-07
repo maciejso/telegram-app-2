@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Alert.css';
+import Apihost from '../Config';
 
-const host = process.env.APIHOST || "http://localhost:5000"
-const url = `${host}/alerts`;
+const url = `${Apihost}/alerts`;
 
 const trigger_type = { "Value Change": "value_change", "Percent Change": "percent_change" }
 

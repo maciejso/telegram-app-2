@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css';
 
-const host = process.env.APIHOST || "http://localhost:5000"
-console.log("host:", host)
+import Apihost from '../Config';
 
-const url = `${host}/prices`;
+const url = `${Apihost}/prices`;
 
 
 const Prices = ({ cryptoPrices, onCryptoDataChange }) => {
