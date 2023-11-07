@@ -37,7 +37,7 @@ bot.action('launch_mini_app', async (ctx) => {
 bot.command('help', async (ctx) => {
   const availableCommands = [
     '/start - Start the bot',
-    '/alert - Launch the mini app',
+    '/alert - Launch the Crypto Alerts mini app',
     '/help - Display available commands',
   ];
 
