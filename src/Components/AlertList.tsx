@@ -3,25 +3,9 @@ import './AlertList.css';
 import Apihost from '../Config';
 import {IAlert, IAlertListProps} from "../models/Alert"
 
-/*
-interface Alert {
-  id: number;
-  cryptocurrency: string;
-  trigger_type: string;
-  trigger_value: number;
-  value: number;
-  expires_at: string;
-}
-
-interface AlertListProps {
-  alerts: Alert[];
-  setAlerts: React.Dispatch<React.SetStateAction<Alert[]>>;
-}
-*/
-
 const url = `${Apihost}/alerts`;
 
-const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts }) => {
+const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => {
   const [editingAlertId, setEditingAlertId] = useState<number | null>(null);
   const [editedAlert, setEditedAlert] = useState<Partial<IAlert>>({});
   const [loading, setLoading] = useState(true);
@@ -33,7 +17,12 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'userId': `${userId}`
+          }
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
