@@ -116,7 +116,7 @@ return (
         <div className="form-group">
           <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
           <input
-            type="text"
+            type="number"
             value={alert.value}
             onChange={(e) => handleInputChange('value', e.target.value)}
           />
