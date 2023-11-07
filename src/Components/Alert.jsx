@@ -100,7 +100,7 @@ const Alert = ({ cryptoPrices, onAlertUpdate }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="value">Value {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
+          <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
           <input
             type="text"
             value={alert.value}
