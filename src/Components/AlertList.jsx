@@ -3,7 +3,8 @@ import './AlertList.css';
 
 
 //const defaultValue = `${year}-${month}-${day}T${hours}:${minutes}`;
-const url = "http://localhost:5000/alerts"
+const host = process.env.HOST || "localhost:5000"
+const url = `${host}/alerts`;
 
 const AlertList = ({alerts, setAlerts}) => {
   const [editingAlertId, setEditingAlertId] = useState(null);

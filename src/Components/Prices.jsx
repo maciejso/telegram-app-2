@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Prices.css';
 
+const host = process.env.HOST || "localhost:5000"
+const url = `${host}/prices`;
+
+
 const Prices = ({ cryptoPrices, onCryptoDataChange }) => {
     
     const [loading, setLoading] = useState(true);
-
-    const url = "http://localhost:5000/prices"
 
     useEffect(() => {
         const fetchData = async () => {

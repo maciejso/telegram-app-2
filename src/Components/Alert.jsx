@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Alert.css';
 
-const url = 'http://localhost:5000/alerts';
+const host = process.env.HOST || "localhost:5000"
+const url = `${host}/alerts`;
 
 const trigger_type = { "Value Change": "value_change", "Percent Change": "percent_change" }
 
