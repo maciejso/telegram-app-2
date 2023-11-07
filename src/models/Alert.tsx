@@ -11,6 +11,7 @@ export interface IAlert {
 export interface IAlertListProps {
   alerts: IAlert[];
   setAlerts: React.Dispatch<React.SetStateAction<IAlert[]>>;
+  userId: string;
 }
 
 
