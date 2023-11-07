@@ -6,7 +6,6 @@ import Prices from "./Components/Prices";
 import {IAlert, IAlertListProps} from "./models/Alert"
 import { ICryptoPrice } from "./models/Price";
 
-const tele = (window as any).Telegram.WebApp;
 
 const App: React.FC = () => {
   const [alerts, setAlerts] = useState<IAlert[]>([]);
@@ -17,11 +16,41 @@ const App: React.FC = () => {
   setCryptoPrices(data);
 };
 
-  useEffect(() => {
-    tele.ready();
-    setUserId(tele.WebAppUser?.first_name || "unknown");
-  }, []);
+  const tele = (window as any).Telegram.WebApp;
 
+  useEffect(() => {
+  // Set up an event listener for when the Telegram WebApp is ready
+  tele.ready(() => {
+    // Now you can safely call methods on the `tele` object
+    tele.MainButton.show();
+    
+    // If you need to request user data, you should do it here
+    tele.getUser().then((user:any) => {
+      console.log(user);
+    }).catch((error:any) => {
+      console.error(error);
+    });
+  });
+}, []);
+
+  if (tele.ready) {
+  // Request user data
+  tele.request({
+    // Specify the user data you want to access, for example:
+    user: {
+      id: true, // User's unique identifier
+      first_name: true, // User's first name
+      last_name: true, // User's last name
+      photo_url: true, // URL of the user's profile picture
+      auth_date: true, // Authentication date
+      hash: true // Data-check hash
+    }
+  }).then((data:any) => {
+    console.log(data);
+  }).catch((error:any) => {
+    console.error(error);
+  });
+}
   const onAlertUpdate = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };
