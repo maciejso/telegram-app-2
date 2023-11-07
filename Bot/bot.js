@@ -47,7 +47,6 @@ bot.command('help', async (ctx) => {
 
 bot.command('quit', async (ctx) => {
   await ctx.telegram.leaveChat(ctx.message.chat.id)
-
   await ctx.leaveChat()
 })
 
@@ -66,7 +65,6 @@ bot.on('callback_query', async (ctx) => {
 bot.on('inline_query', async (ctx) => {
   const result = []
   await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
-
   await ctx.answerInlineQuery(result)
 })
 
