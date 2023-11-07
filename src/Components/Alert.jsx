@@ -51,7 +51,7 @@ const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
 
       console.log(JSON.stringify(alertWithPrice))
 
-      const response = await fetch(`${url}/&userId=${userId}`, {
+      const response = await fetch(`${url}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
