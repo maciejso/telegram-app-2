@@ -18,12 +18,12 @@ const App: React.FC = () => {
 
   const tele = (window as any).Telegram.WebApp;
   function getUserData() {
-      const initDataUnsafe = (window as any).Telegram.WebApp.initDataUnsafe || {};
-      const userId = initDataUnsafe.user && initDataUnsafe.user.id;
-      const username = initDataUnsafe.user && initDataUnsafe.user.username;
+    const initDataUnsafe = (window as any).Telegram.WebApp.initDataUnsafe || {};
+    const userId = initDataUnsafe.user && initDataUnsafe.user.id;
+    const username = initDataUnsafe.user && initDataUnsafe.user.username;
 
-      console.log('User ID:', userId);
-      console.log('Username:', username);
+    console.log('User ID:', userId);
+    console.log('Username:', username);
 
   }
 
