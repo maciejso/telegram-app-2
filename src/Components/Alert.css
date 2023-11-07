@@ -29,7 +29,7 @@ input {
 .alert-container {
   max-width: 350px;
   min-width: 350px;
-  margin: 0 auto;
+  margin: 25px auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
