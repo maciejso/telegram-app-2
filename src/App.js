@@ -10,7 +10,7 @@ const tele = window.Telegram.WebApp;
 
 function App() {
   const [alerts, setAlerts] = useState([]);
-  const [userId, setuserId] = useState("mac");
+  const [userId, setUserId] = useState("mac");
   const [cryptoPrices, setCryptoPrices] = useState([]);
   const handleCryptoDataChange = (data) => {
     setCryptoPrices(data);
@@ -19,14 +19,17 @@ function App() {
 
   useEffect(() => {
     tele.ready();
+    setUserId(tele.WebAppUser?.id || "unknown")
   },[cryptoPrices])
+
+    const onAlertUpdate= (newAlert) => setAlerts((prevAlerts) => [...prevAlerts, newAlert])
 
   return (
     <div className="container">
       <h1>Crypto Alerts</h1>
       <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
       <AlertList alerts={alerts} setAlerts={setAlerts} />
-      <Alert cryptoPrices={cryptoPrices} onAlertUpdate={(newAlert) => setAlerts((prevAlerts) => [...prevAlerts, newAlert])} />
+      <Alert cryptoPrices={cryptoPrices}  onAlertUpdate={onAlertUpdate} userId={userId}  />
     </div>
   );
 };

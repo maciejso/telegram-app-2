@@ -19,7 +19,7 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = ({ cryptoPrices, onAlertUpdate }) => {
+const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
 
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
@@ -51,7 +51,7 @@ const Alert = ({ cryptoPrices, onAlertUpdate }) => {
 
       console.log(JSON.stringify(alertWithPrice))
 
-      const response = await fetch(url, {
+      const response = await fetch(`${url}/&userId=${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
