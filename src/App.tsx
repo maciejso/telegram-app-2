@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const tele = (window as any).Telegram.WebApp;
 
   function getUserData() {
-    const initDataUnsafe = (window as any).Telegram.WebApp.initDataUnsafe || {};
+    const initDataUnsafe = tele.initDataUnsafe || {};
     const userId = initDataUnsafe.user && initDataUnsafe.user.id;
     const firstName = initDataUnsafe.user && initDataUnsafe.user.first_name;
 
@@ -30,11 +30,8 @@ const App: React.FC = () => {
 
 
   useEffect(() => {
-    tele.onEvent('mainButtonClicked', () => {
-    });
     tele.ready();
     getUserData();
-    console.log("###")
   }, []);
 
   const onAlertUpdate = (newAlert: IAlert) => {
