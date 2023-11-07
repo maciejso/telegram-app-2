@@ -2,15 +2,32 @@ import React, { useState } from 'react';
 import './Alert.css';
 import Apihost from '../Config';
 
+interface DateTimePickerProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+interface DropdownProps {
+  options: string[];
+  selectedOption: string;
+  onChange: (value: string) => void;
+}
+
+interface AlertProps {
+  cryptoPrices: any[]; 
+  onAlertUpdate: (newAlert: any) => void; 
+  userId: string;
+}
+
 const url = `${Apihost}/alerts`;
 
-const trigger_type = { "Value Change": "value_change", "Percent Change": "percent_change" }
+const trigger_type: { [key: string]: string } = { "Value Change": "value_change", "Percent Change": "percent_change" };
 
-const DateTimePicker = ({ value, onChange }) => (
+const DateTimePicker: React.FC<DateTimePickerProps> = ({ value, onChange }) => (
   <input type="datetime-local" value={value} onChange={(e) => onChange(e.target.value)} />
 );
 
-const Dropdown = ({ options, selectedOption, onChange }) => (
+const Dropdown: React.FC<DropdownProps> = ({ options, selectedOption, onChange }) => (
   <select value={selectedOption} onChange={(e) => onChange(e.target.value)}>
     {options.map((option) => (
       <option key={option} value={option}>
@@ -20,7 +37,7 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
+const Alert: React.FC<AlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) => {
 
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
@@ -29,28 +46,24 @@ const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
     expiryDate: "2023-12-31T23:59"
   });
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: string) => {
     setAlert((prevAlert) => ({
       ...prevAlert,
       [field]: value,
     }));
   };
 
-
   const handleSaveAlert = async () => {
     try {
       const currentPrice = cryptoPrices.find(data => data.cryptocurrency === alert.cryptocurrency)?.value || 0;
-      //console.log(trigger_type[alert.type])
       const alertWithPrice = {
         cryptocurrency: alert.cryptocurrency,
         trigger_value: parseInt(alert.value, 10),
         trigger_type: trigger_type[alert.type],
         base_value: currentPrice,
-        user_id: "mac",
+        user_id: userId,
         expires_at: alert.expiryDate
       };
-
-      console.log(JSON.stringify(alertWithPrice))
 
       const response = await fetch(`${url}`, {
         method: 'POST',
@@ -59,9 +72,9 @@ const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
         },
         body: JSON.stringify(alertWithPrice),
       });
-      
+
       const jsonResponse = await response.json();
-      onAlertUpdate({...jsonResponse, expires_at:new Date(jsonResponse["expires_at"]).toUTCString() })
+      onAlertUpdate({ ...jsonResponse, expires_at: new Date(jsonResponse["expires_at"]).toUTCString() });
 
       console.log('Alert saved successfully');
       console.log('Response JSON:', jsonResponse);
@@ -76,7 +89,7 @@ const Alert = ({ cryptoPrices, onAlertUpdate, userId }) => {
     }
   };
 
-  return (
+return (
 
     <>
       <h2>Add Alert</h2>

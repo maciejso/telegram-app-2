@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 import Apihost from '../Config';
+import {IAlert, IAlertListProps} from "../models/Alert"
+
+/*
+interface Alert {
+  id: number;
+  cryptocurrency: string;
+  trigger_type: string;
+  trigger_value: number;
+  value: number;
+  expires_at: string;
+}
+
+interface AlertListProps {
+  alerts: Alert[];
+  setAlerts: React.Dispatch<React.SetStateAction<Alert[]>>;
+}
+*/
 
 const url = `${Apihost}/alerts`;
 
-const AlertList = ({alerts, setAlerts}) => {
-  const [editingAlertId, setEditingAlertId] = useState(null);
-  const [editedAlert, setEditedAlert] = useState({});
+const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts }) => {
+  const [editingAlertId, setEditingAlertId] = useState<number | null>(null);
+  const [editedAlert, setEditedAlert] = useState<Partial<IAlert>>({});
   const [loading, setLoading] = useState(true);
 
-  const handleSaveAlert = (newAlert) => {
+  const handleSaveAlert = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };
 
-  const onEditAlert = (editedAlert) => {
+  const onEditAlert = (editedAlert: Partial<IAlert>) => {
     console.log('Edited Alert:', editedAlert);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,10 +55,9 @@ const AlertList = ({alerts, setAlerts}) => {
     fetchData();
   }, []);
 
-
-  const handleDeleteClick = async (alertId) => {
+  const handleDeleteClick = async (alertId: number) => {
     try {
-      const response = await fetch(url + "/" + alertId, {
+      const response = await fetch(`${url}/${alertId}`, {
         method: 'DELETE',
       });
 
@@ -57,15 +72,15 @@ const AlertList = ({alerts, setAlerts}) => {
     }
   };
 
-  const handleEditClick = (alertId) => {
+  const handleEditClick = (alertId: number) => {
     setEditingAlertId(alertId);
-    setEditedAlert(alerts.find((alert) => alert.id === alertId));
+    setEditedAlert(alerts.find((alert) => alert.id === alertId) || {});
   };
 
   const handleCancelEdit = () => {
     setEditingAlertId(null);
     setEditedAlert({});
-    console.log("Edit cancelled")
+    console.log('Edit cancelled');
   };
 
   const handleSaveEdit = async () => {
@@ -74,17 +89,20 @@ const AlertList = ({alerts, setAlerts}) => {
     setEditedAlert({});
     setAlerts((prevAlerts) =>
       prevAlerts.map((alert) =>
-        alert.id === editingAlertId ? { ...alert, ...editedAlert, expires_at: new Date(editedAlert.expires_at).toUTCString() } : alert
-      ));
+        alert.id === editingAlertId
+          ? { ...alert, ...editedAlert, expires_at: new Date(editedAlert.expires_at!).toUTCString() }
+          : alert
+      )
+    );
     try {
-      console.log(editedAlert)
+      console.log(editedAlert);
       const editedAlertConverted = {
         ...editedAlert,
-        trigger_value: parseFloat(editedAlert.trigger_value),
-        expires_at: convertToISODateTime(editedAlert.expires_at)
+        trigger_value: editedAlert.trigger_value !== undefined ? parseFloat(editedAlert.trigger_value.toString()) : 0,
+        expires_at: convertToISODateTime(editedAlert.expires_at!),
       };
 
-      const response = await fetch(url + "/" + editingAlertId, {
+      const response = await fetch(`${url}/${editingAlertId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -102,7 +120,7 @@ const AlertList = ({alerts, setAlerts}) => {
     }
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: string) => {
     setEditedAlert((prevEditedAlert) => ({
       ...prevEditedAlert,
       [field]: field === 'expires_at' ? convertToISODateTime(value) : value,
@@ -112,50 +130,69 @@ const AlertList = ({alerts, setAlerts}) => {
   return (
     <div className="alert-list-container">
       <h2>Alerts List</h2>
-      {loading ? (<p>Loading...</p>) : (
-
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
         <ul className="alert-list">
           {alerts.map((alert) => (
             <li key={alert.id} className={editingAlertId === alert.id ? 'editing' : ''}>
               <div className="alert-details">
                 {editingAlertId === alert.id ? (
                   <>
-                    <p><strong>Cryptocurrency:</strong>
-                      <select value={editedAlert.cryptocurrency} onChange={(e) => handleInputChange('cryptocurrency', e.target.value)}>
+                    <p>
+                      <strong>Cryptocurrency:</strong>
+                      <select
+                        value={editedAlert.cryptocurrency}
+                        onChange={(e) => handleInputChange('cryptocurrency', e.target.value)}
+                      >
                         <option value="BTC">BTC</option>
                         <option value="ETH">ETH</option>
                         <option value="TON">TON</option>
                       </select>
                     </p>
-                    <p><strong>Type:</strong>
-                      <select value={editedAlert.trigger_type} onChange={(e) => handleInputChange('trigger_type', e.target.value)}>
+                    <p>
+                      <strong>Type:</strong>
+                      <select
+                        value={editedAlert.trigger_type}
+                        onChange={(e) => handleInputChange('trigger_type', e.target.value)}
+                      >
                         <option value="percent_change">Percent Change</option>
                         <option value="value_change">Value Change</option>
                       </select>
                     </p>
-                    <p><strong>Value:</strong>
-                      <input type="text" value={editedAlert.trigger_value} onChange={(e) => handleInputChange('trigger_value', e.target.value)} />
+                    <p>
+                      <strong>Value:</strong>
+                      <input
+                        type="text"
+                        value={editedAlert.trigger_value}
+                        onChange={(e) => handleInputChange('trigger_value', e.target.value)}
+                      />
                     </p>
                     <p>
                       <strong>Expiry Date:</strong>
                       <input
                         type="datetime-local"
-                        value={convertToISODateTime(editedAlert.expires_at) || ''}
+                        value={convertToISODateTime(editedAlert.expires_at || '')}
                         onChange={(e) => handleInputChange('expires_at', e.target.value)}
                       />
                     </p>
                   </>
                 ) : (
                   <>
-                    <p><strong>Cryptocurrency: </strong> {alert.cryptocurrency}</p>
-                    <p><strong>Type: </strong> {alert.trigger_type}</p>
+                    <p>
+                      <strong>Cryptocurrency: </strong> {alert.cryptocurrency}
+                    </p>
+                    <p>
+                      <strong>Type: </strong> {alert.trigger_type}
+                    </p>
                     <p>
                       <strong>Value: </strong>
-                      {alert.trigger_type === "value_change" ? `$${alert.trigger_value}` : alert.trigger_value}
-                      {alert.trigger_type === "percent_change" && "%"}
+                      {alert.trigger_type === 'value_change' ? `$${alert.trigger_value}` : alert.trigger_value}
+                      {alert.trigger_type === 'percent_change' && '%'}
                     </p>
-
-                    <p><strong>Expiry Date :</strong> {alert.expires_at}</p>
+                    <p>
+                      <strong>Expiry Date :</strong> {alert.expires_at}
+                    </p>
                   </>
                 )}
               </div>
@@ -168,18 +205,21 @@ const AlertList = ({alerts, setAlerts}) => {
                 ) : (
                   <div className="alert-actions-delete">
                     <button onClick={() => handleEditClick(alert.id)}>Edit</button>
-                    <button className="btn-delete" onClick={() => handleDeleteClick(alert.id)}>Delete</button>
+                    <button className="btn-delete" onClick={() => handleDeleteClick(alert.id)}>
+                      Delete
+                    </button>
                   </div>
                 )}
               </div>
             </li>
           ))}
-        </ul>)}
+        </ul>
+      )}
     </div>
   );
 };
 
-const convertToISODateTime = (value) => {
+const convertToISODateTime = (value: string) => {
   const dateObject = new Date(value);
   if (!isNaN(dateObject.getTime())) {
     const year = dateObject.getFullYear();
@@ -194,4 +234,3 @@ const convertToISODateTime = (value) => {
 };
 
 export default AlertList;
-
