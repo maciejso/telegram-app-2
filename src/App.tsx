@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
     console.log('User ID:', userId);
     console.log('Username:', firstName);
-    setUserId(userId);
+    setUserId(userId.toString());
   }
 
 
