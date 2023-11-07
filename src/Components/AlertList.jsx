@@ -83,7 +83,7 @@ const AlertList = () => {
       const editedAlertConverted = {
         ...editedAlert,
         trigger_value: parseFloat(editedAlert.trigger_value),
-        expires_at: editedAlert.expires_at
+        expires_at: convertToISODateTime(editedAlert.expires_at)
       };
 
       const response = await fetch(url + "/" + editingAlertId, {
