@@ -43,7 +43,8 @@ const Alert: React.FC<AlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =>
     cryptocurrency: 'BTC',
     type: 'Value Change',
     value: '20',
-    expiryDate: "2023-12-31T23:59"
+    expiryDate: "2023-12-31T23:59",
+    userId: userId
   });
 
   const handleInputChange = (field: string, value: string) => {
