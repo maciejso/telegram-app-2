@@ -26,10 +26,6 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts }) => {
   const [editedAlert, setEditedAlert] = useState<Partial<IAlert>>({});
   const [loading, setLoading] = useState(true);
 
-  const handleSaveAlert = (newAlert: IAlert) => {
-    setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
-  };
-
   const onEditAlert = (editedAlert: Partial<IAlert>) => {
     console.log('Edited Alert:', editedAlert);
   };
