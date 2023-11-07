@@ -19,7 +19,22 @@ const Dropdown = ({ options, selectedOption, onChange }) => (
   </select>
 );
 
-const Alert = ({ cryptoPrices, alert, handleInputChange }) => {
+const Alert = ({ cryptoPrices }) => {
+
+  const [alert, setAlert] = useState({
+    cryptocurrency: 'BTC',
+    type: 'Value Change',
+    value: '20',
+    expiryDate: "2023-12-31T23:59"
+  });
+
+  const handleInputChange = (field, value) => {
+    setAlert((prevAlert) => ({
+      ...prevAlert,
+      [field]: value,
+    }));
+  };
+
 
   const handleSaveAlert = async () => {
     try {
