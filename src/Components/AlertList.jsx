@@ -3,7 +3,7 @@ import './AlertList.css';
 
 
 //const defaultValue = `${year}-${month}-${day}T${hours}:${minutes}`;
-const host = process.env.APIHOST || "localhost:5000"
+const host = process.env.APIHOST || "http://localhost:5000"
 const url = `${host}/alerts`;
 
 const AlertList = ({alerts, setAlerts}) => {

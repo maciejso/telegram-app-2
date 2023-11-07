@@ -3,6 +3,7 @@ import './Prices.css';
 
 const host = process.env.APIHOST || "http://localhost:5000"
 console.log("host:", host)
+
 const url = `${host}/prices`;
 
 
