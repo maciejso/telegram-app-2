@@ -79,6 +79,11 @@ bot.on(message('text'), async (ctx) => {
   //ctx.reply(`Welcome! Your user ID is: ${userId}`);
   const userName = ctx.message.from.first_name;
   await ctx.reply(`Hi ${userName}! How can I help you.`);
+    const keyboard = Markup.inlineKeyboard([
+    Markup.button.callback('Launch Mini App', 'launch_mini_app'),
+  ]);
+
+  await ctx.reply('Launch Crypto Alert mini App:', keyboard);
 })
 
 bot.on('callback_query', async (ctx) => {
@@ -97,7 +102,8 @@ bot.start((ctx) => {
   const userId = ctx.from.id;
   console.log(`User ID: ${userId}`);
 
-  ctx.reply(`Welcome! Your user ID is: ${userId}`);
+  //ctx.reply(`Welcome! Your user ID is: ${userId}`);
+  
 });
 
 
