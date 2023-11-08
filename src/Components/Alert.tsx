@@ -57,7 +57,7 @@ const Alert: React.FC<IAlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =
         cryptocurrency: alert.cryptocurrency,
         trigger_value: parseInt(alert.value, 10),
         trigger_type: trigger_type[alert.type],
-        base_value: currentPrice,
+        base_value: +currentPrice,
         user_id: userId,
         expires_at: alert.expiryDate
       };
