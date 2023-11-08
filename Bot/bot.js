@@ -1,13 +1,12 @@
-const { Telegraf, Markup } = require('telegraf');
-const { message } = require('telegraf/filters')
+import { Telegraf, Markup } from 'telegraf';
+import { message } from 'telegraf/filters';
+import 'dotenv/config';
 
-require('dotenv/config')
 const miniAppUrl = 'https://t.me/intenzia2bot/app2'; 
 
 const bot = new Telegraf(process.env.TOKEN2);
 
 bot.use((ctx, next) => {
-  if (ctx.message?.text)
   console.log(`Received message: ${ctx.message.text}`);
   next();
 });
