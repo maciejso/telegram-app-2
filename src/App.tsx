@@ -11,6 +11,7 @@ const App: React.FC = () => {
   const [alerts, setAlerts] = useState<IAlert[]>([]);
   const [userId, setUserId] = useState<string>("unknown");
   const [cryptoPrices, setCryptoPrices] = useState<IAlert[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleCryptoDataChange = (data: any) => {
     setCryptoPrices(data);
@@ -30,14 +31,21 @@ const App: React.FC = () => {
 
 
   useEffect(() => {
+    setIsLoading(true);
     tele.ready();
     getUserData();
+    setIsLoading(false);
   }, [userId]);
 
   const onAlertUpdate = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };
 
+  if (isLoading){
+    <div className="container">
+      <div>Loading...</div>
+    </div>
+  }
   return (
     <div className="container">
       <h1>Crypto Alerts</h1>
