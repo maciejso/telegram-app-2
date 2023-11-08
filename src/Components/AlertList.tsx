@@ -78,11 +78,11 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId, crypt
       )
     );
     try {
-      console.log("###")
-      console.log(cryptoPrices)
+      const currentPrice = cryptoPrices.find(data => data.cryptocurrency === editedAlert.cryptocurrency)?.value || 0;
+      console.log("current price: ", currentPrice)
       const editedAlertConverted = {
         ...editedAlert,
-        //base_value: cryptoPrices[editedAlert.cryptocurrency],
+        base_value: currentPrice,
         trigger_value: editedAlert.trigger_value !== undefined ? parseFloat(editedAlert.trigger_value.toString()) : 0,
         expires_at: convertToISODateTime(editedAlert.expires_at!),
       };
