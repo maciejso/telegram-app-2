@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AlertList.css';
 import Apihost from '../Config';
-import {IAlert, IAlertListProps} from "../models/Alert"
+import { IAlert, IAlertListProps } from "../models/Alert"
 
 const url = `${Apihost}/alerts`;
 

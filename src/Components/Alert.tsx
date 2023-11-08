@@ -14,8 +14,8 @@ interface DropdownProps {
 }
 
 interface AlertProps {
-  cryptoPrices: any[]; 
-  onAlertUpdate: (newAlert: any) => void; 
+  cryptoPrices: any[];
+  onAlertUpdate: (newAlert: any) => void;
   userId: string;
 }
 
@@ -90,7 +90,7 @@ const Alert: React.FC<AlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =>
     }
   };
 
-return (
+  return (
 
     <>
       <h2>Add Alert</h2>
