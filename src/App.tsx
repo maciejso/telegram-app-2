@@ -31,16 +31,11 @@ const App: React.FC = () => {
 
 
   useEffect(() => {
-      const handleWebAppReady = () => {
-      console.log('Telegram Web App is ready');
-      getUserData(); // Assuming this is a function to fetch user data
-    };
     setIsLoading(true);
     tele.ready();
     getUserData();
     setIsLoading(false);
-    tele.onEvent('web_app_ready', handleWebAppReady);
-  }, [userId]);
+  }, []);
 
   const onAlertUpdate = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
