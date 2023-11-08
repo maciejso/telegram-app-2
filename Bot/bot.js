@@ -51,7 +51,10 @@ bot.command('quit', async (ctx) => {
 })
 
 bot.on(message('text'), async (ctx) => {
-  // await ctx.reply(`${ctx.message.text}`)
+  const userId = ctx.from.id;
+  console.log(`User ID: ${userId}`);
+
+  ctx.reply(`Welcome! Your user ID is: ${userId}`);
   const userName = ctx.message.from.first_name;
   await ctx.reply(`Hi ${userName}! How can I help you.`);
 })
@@ -67,6 +70,26 @@ bot.on('inline_query', async (ctx) => {
   await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result)
   await ctx.answerInlineQuery(result)
 })
+
+bot.start((ctx) => {
+  const userId = ctx.from.id;
+  console.log(`User ID: ${userId}`);
+
+  ctx.reply(`Welcome! Your user ID is: ${userId}`);
+});
+
+
+function sendMessageToUser(userId, message) {
+  bot.telegram.sendMessage(userId, message)
+    .then(() => {
+      console.log(`Message sent to user with ID: ${userId}`);
+    })
+    .catch((error) => {
+      console.error(`Could not send message to the user with ID: ${userId}`, error);
+    });
+}
+
+sendMessageToUser(6330525674, "co jest miszczu?");
 
 bot.launch()
 
