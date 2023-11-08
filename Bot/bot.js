@@ -20,9 +20,10 @@ app.use((req, res, next) => {
 bot.telegram.setWebhook(`${botUrl}/trigger`)
 
 app.post('/trigger', (req, res) => {
-  let userId = 5852786190
-  sendMessageToUser(userId, "co jest")
-  res.send("Ok", 201)
+  let userId = req.body.user_id;
+  let message = req.body.message;
+  sendMessageToUser(userId, message)
+  res.send({"message": "Ok"}, 201)
 });
 
 bot.use((ctx, next) => {
