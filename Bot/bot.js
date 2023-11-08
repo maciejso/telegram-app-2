@@ -1,16 +1,37 @@
 import { Telegraf, Markup } from 'telegraf';
 import { message } from 'telegraf/filters';
+import express from "express";
 import 'dotenv/config';
 
 const miniAppUrl = 'https://t.me/intenzia2bot/app2'; 
+const botUrl = "https://27b7-82-43-212-31.ngrok-free.app"
+const port = process.env.PORT || 4000;
 
+const app = express();
 const bot = new Telegraf(process.env.TOKEN2);
 
-bot.use((ctx, next) => {
-  console.log(`Received message: ${ctx.message.text}`);
-  next();
+app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} request to ${req.url}`);
+  next(); 
 });
 
+bot.telegram.setWebhook(`${botUrl}/trigger`)
+
+app.post('/trigger', (req, res) => {
+  let userId = 5852786190
+  sendMessageToUser(userId, "co jest")
+  res.send("Ok")
+});
+
+bot.use((ctx, next) => {
+  //console.log(ctx.botInfo)
+  next();
+});
+bot.command('trigger', (ctx) => {
+  ctx.reply('The /trigger command was received!');
+});
 
 bot.hears('alert', (ctx) => {
     const keyboard = Markup.inlineKeyboard([
@@ -91,6 +112,11 @@ function sendMessageToUser(userId, message) {
 sendMessageToUser(6330525674, "co jest miszczu?");
 
 bot.launch()
+
+app.listen(port, ()=> {
+  console.log(`Server running on port ${port}`)
+})
+
 
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
