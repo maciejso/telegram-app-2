@@ -22,7 +22,7 @@ bot.telegram.setWebhook(`${botUrl}/trigger`)
 app.post('/trigger', (req, res) => {
   let userId = 5852786190
   sendMessageToUser(userId, "co jest")
-  res.send("Ok")
+  res.send("Ok", 201)
 });
 
 bot.use((ctx, next) => {
