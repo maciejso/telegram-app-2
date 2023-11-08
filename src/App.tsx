@@ -32,9 +32,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    tele.ready();
-    getUserData();
-    setIsLoading(false);
+    tele.ready(()=> {
+      getUserData();
+      setIsLoading(false);
+    });
   }, [userId]);
 
   const onAlertUpdate = (newAlert: IAlert) => {
