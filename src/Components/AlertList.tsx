@@ -18,11 +18,8 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => 
     const fetchData = async () => {
       console.log(userId)
       try {
-        const response = await fetch(url, {
+        const response = await fetch(`${url}?userId=${userId}`, {
           method: 'GET',
-          headers: {
-            'UserId': `${userId}`
-          }
         });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
