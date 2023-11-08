@@ -9,7 +9,7 @@ import { ICryptoPrice } from "./models/Price";
 
 const App: React.FC = () => {
   const [alerts, setAlerts] = useState<IAlert[]>([]);
-  const [userId, setUserId] = useState<string>("mac");
+  const [userId, setUserId] = useState<string>("unknown");
   const [cryptoPrices, setCryptoPrices] = useState<IAlert[]>([]);
 
   const handleCryptoDataChange = (data: any) => {
