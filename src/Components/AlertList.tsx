@@ -16,7 +16,7 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => 
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(userId)
+      console.log(`userId: ${userId}`)
       try {
         const response = await fetch(`${url}?userId=${userId}`, {
           method: 'GET',
