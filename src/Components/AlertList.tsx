@@ -78,7 +78,6 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => 
       )
     );
     try {
-      console.log(editedAlert);
       const editedAlertConverted = {
         ...editedAlert,
         trigger_value: editedAlert.trigger_value !== undefined ? parseFloat(editedAlert.trigger_value.toString()) : 0,
