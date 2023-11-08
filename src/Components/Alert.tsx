@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Alert.css';
 import Apihost from '../Config';
 import { ICryptoPrice } from '../models/Price';
-import { IAlert } from '../models/Alert';
+import { IAlert, IAlertProps } from '../models/Alert';
 
 interface DateTimePickerProps {
   value: string;
@@ -15,11 +15,6 @@ interface DropdownProps {
   onChange: (value: string) => void;
 }
 
-interface AlertProps {
-  cryptoPrices: any[];
-  onAlertUpdate: (newAlert: any) => void;
-  userId: string;
-}
 
 const url = `${Apihost}/alerts`;
 
@@ -39,9 +34,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, selectedOption, onChange }
   </select>
 );
 
-const Alert: React.FC<{ cryptoPrices: ICryptoPrice[]; onAlertUpdate: (newAlert: IAlert) => void; userId: string }> = ({ cryptoPrices, onAlertUpdate, userId }) => {
-  //const Alert: React.FC<AlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) => {
-
+const Alert: React.FC<IAlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) => {
   const [alert, setAlert] = useState({
     cryptocurrency: 'BTC',
     type: 'Value Change',

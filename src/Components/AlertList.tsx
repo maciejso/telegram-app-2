@@ -5,7 +5,7 @@ import { IAlert, IAlertListProps } from "../models/Alert"
 
 const url = `${Apihost}/alerts`;
 
-const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => {
+const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId, cryptoPrices }) => {
   const [editingAlertId, setEditingAlertId] = useState<number | null>(null);
   const [editedAlert, setEditedAlert] = useState<Partial<IAlert>>({});
   const [loading, setLoading] = useState(true);
@@ -78,8 +78,11 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId }) => 
       )
     );
     try {
+      console.log("###")
+      console.log(cryptoPrices)
       const editedAlertConverted = {
         ...editedAlert,
+        //base_value: cryptoPrices[editedAlert.cryptocurrency],
         trigger_value: editedAlert.trigger_value !== undefined ? parseFloat(editedAlert.trigger_value.toString()) : 0,
         expires_at: convertToISODateTime(editedAlert.expires_at!),
       };

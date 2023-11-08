@@ -51,7 +51,7 @@ const App: React.FC = () => {
       <div className="container">
         <h1>Crypto Alerts</h1>
         <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
-        <AlertList alerts={alerts} setAlerts={setAlerts} userId={userId} />
+        <AlertList alerts={alerts} cryptoPrices={cryptoPrices} setAlerts={setAlerts} userId={userId} />
         <Alert cryptoPrices={cryptoPrices} onAlertUpdate={onAlertUpdate} userId={userId} />
       </div>
     )
