@@ -20,7 +20,7 @@ const App: React.FC = () => {
 
   function getUserData() {
     const initDataUnsafe = tele.initDataUnsafe || {};
-    const userId = initDataUnsafe.user && initDataUnsafe.user.id || "mac"
+    const userId = initDataUnsafe.user && initDataUnsafe.user.id || "unknown"
     const firstName = initDataUnsafe.user && initDataUnsafe.user.first_name;
 
     console.log('User ID:', userId);
