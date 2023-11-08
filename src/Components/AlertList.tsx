@@ -78,7 +78,7 @@ const AlertList: React.FC<IAlertListProps> = ({ alerts, setAlerts, userId, crypt
       )
     );
     try {
-      const currentPrice = cryptoPrices.find(data => data.cryptocurrency === editedAlert.cryptocurrency)?.value || 0;
+      const currentPrice = +(cryptoPrices.find(data => data.cryptocurrency === editedAlert.cryptocurrency)?.value || 0);
       console.log("current price: ", currentPrice)
       const editedAlertConverted = {
         ...editedAlert,
