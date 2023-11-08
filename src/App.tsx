@@ -32,7 +32,7 @@ const App: React.FC = () => {
   useEffect(() => {
     tele.ready();
     getUserData();
-  }, []);
+  }, [userId]);
 
   const onAlertUpdate = (newAlert: IAlert) => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
