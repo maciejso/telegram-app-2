@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const tele = (window as any).Telegram.WebApp;
 
   function getUserData() {
+    console.log("get user data");
     const initDataUnsafe = tele.initDataUnsafe || {};
     const userId = initDataUnsafe.user && initDataUnsafe.user.id || "mac"
     const firstName = initDataUnsafe.user && initDataUnsafe.user.first_name;
