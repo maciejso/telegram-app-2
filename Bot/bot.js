@@ -22,6 +22,7 @@ bot.telegram.setWebhook(`${botUrl}/trigger`)
 app.post('/trigger', (req, res) => {
   let userId = req.body.user_id;
   let message = req.body.message;
+  console.log(userId, message)
   sendMessageToUser(userId, message)
   res.send({"message": "Ok"}, 201)
 });
@@ -75,7 +76,7 @@ bot.on(message('text'), async (ctx) => {
   const userId = ctx.from.id;
   console.log(`User ID: ${userId}`);
 
-  ctx.reply(`Welcome! Your user ID is: ${userId}`);
+  //ctx.reply(`Welcome! Your user ID is: ${userId}`);
   const userName = ctx.message.from.first_name;
   await ctx.reply(`Hi ${userName}! How can I help you.`);
 })
@@ -109,9 +110,6 @@ function sendMessageToUser(userId, message) {
       console.error(`Could not send message to the user with ID: ${userId}`, error);
     });
 }
-
-sendMessageToUser(6330525674, "co jest miszczu?");
-
 bot.launch()
 
 app.listen(port, ()=> {
