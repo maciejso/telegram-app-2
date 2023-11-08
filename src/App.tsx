@@ -42,18 +42,19 @@ const App: React.FC = () => {
     setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
   };
 
-  if (isLoading){
-    <div className="container">
-      <div>Loading...</div>
-    </div>
-  }
   return (
-    <div className="container">
-      <h1>Crypto Alerts</h1>
-      <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
-      <AlertList alerts={alerts} setAlerts={setAlerts} userId={userId} />
-      <Alert cryptoPrices={cryptoPrices} onAlertUpdate={onAlertUpdate} userId={userId} />
-    </div>
+    isLoading ? (
+      <div className="container">
+        <div>Loading...</div>
+      </div>
+    ) : (
+      <div className="container">
+        <h1>Crypto Alerts</h1>
+        <Prices cryptoPrices={cryptoPrices} onCryptoDataChange={handleCryptoDataChange} />
+        <AlertList alerts={alerts} setAlerts={setAlerts} userId={userId} />
+        <Alert cryptoPrices={cryptoPrices} onAlertUpdate={onAlertUpdate} userId={userId} />
+      </div>
+    )
   );
 };
 
