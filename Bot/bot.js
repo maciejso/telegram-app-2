@@ -4,7 +4,8 @@ import express from "express";
 import 'dotenv/config';
 
 const miniAppUrl = 'https://t.me/intenzia2bot/app2'; 
-const botUrl = "https://f9bb-82-43-212-31.ngrok-free.app"
+//const botUrl = "https://f9bb-82-43-212-31.ngrok-free.app"
+const botUrl = process.env.BOTURL || "";
 const port = process.env.PORT || 4000;
 
 const app = express();
