@@ -90,6 +90,7 @@ const Alert: React.FC<IAlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =
 
     <>
       <h2>Add Alert</h2>
+      <p>Price updates every 10mins</p>
       <div className="alert-container">
 
         <div className="form-group">
@@ -111,7 +112,7 @@ const Alert: React.FC<IAlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =
         </div>
 
         <div className="form-group">
-          <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
+          <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"} ():</label>
           <input
             type="number"
             value={alert.value}
