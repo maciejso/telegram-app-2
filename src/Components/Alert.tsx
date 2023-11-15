@@ -112,7 +112,7 @@ const Alert: React.FC<IAlertProps> = ({ cryptoPrices, onAlertUpdate, userId }) =
         </div>
 
         <div className="form-group">
-          <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"} ():</label>
+          <label htmlFor="value">Change {alert.type == "Percent Change" ? "in %" : "in $"}:</label>
           <input
             type="number"
             value={alert.value}
