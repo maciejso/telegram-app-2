@@ -9,5 +9,8 @@ tunnels:
     proto: http
     addr: 5000
 
-#Forwarding                    https://66d2-82-43-212-31.ngrok-free.app -> http://localhost:5000                                                                 
-#Forwarding                    https://8ac2-82-43-212-31.ngrok-free.app -> http://localhost:4000           
+
+
+
+#Forwarding                    https://515a-82-43-212-31.ngrok-free.app -> http://localhost:4000                                                                                                                                                            
+#Forwarding                    https://a006-82-43-212-31.ngrok-free.app -> http://localhost:5000            
