@@ -44,8 +44,12 @@ const App: React.FC = () => {
   };
 
   return (
-    down ? <h1>App down for maintenance</h1> : 
-    (isLoading ? (
+    (down ? 
+      <>
+      <h1>App down for maintenance</h1>
+      <p>Please send an email to m.soczka@gmail.com to get the app up and running</p>
+      </>
+    :(isLoading ? (
       <div className="container">
         <div>Loading...</div>
       </div>
@@ -57,7 +61,7 @@ const App: React.FC = () => {
         <Alert cryptoPrices={cryptoPrices} onAlertUpdate={onAlertUpdate} userId={userId} />
       </div>
     )
-  ));
+  )));
 };
 
 
