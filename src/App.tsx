@@ -8,6 +8,7 @@ import { ICryptoPrice } from "./models/Price";
 
 
 const App: React.FC = () => {
+  const [down, setDown] = useState(true);
   const [alerts, setAlerts] = useState<IAlert[]>([]);
   const [userId, setUserId] = useState<string>("unknown");
   const [cryptoPrices, setCryptoPrices] = useState<IAlert[]>([]);
@@ -43,7 +44,8 @@ const App: React.FC = () => {
   };
 
   return (
-    isLoading ? (
+    down ? <h1>App down for maintenance</h1> : 
+    (isLoading ? (
       <div className="container">
         <div>Loading...</div>
       </div>
@@ -55,7 +57,7 @@ const App: React.FC = () => {
         <Alert cryptoPrices={cryptoPrices} onAlertUpdate={onAlertUpdate} userId={userId} />
       </div>
     )
-  );
+  ));
 };
 
 
